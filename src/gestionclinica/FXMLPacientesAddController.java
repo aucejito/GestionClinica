@@ -31,7 +31,8 @@ public class FXMLPacientesAddController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        //"Lunes", "Martes","Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"));
+        
+//"Lunes", "Martes","Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"));
     }    
     
     

@@ -8,7 +8,7 @@ package gestionclinica;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
-
+import org.controlsfx.control.*;
 /**
  * FXML Controller class
  *
