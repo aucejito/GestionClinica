@@ -5,10 +5,15 @@
         <group>
             <file>file:/C:/Users/Carlos/Documents/NetBeansProjects/GestionClinica/src/gestionclinica/FXMLMedicosAddController.java</file>
             <file>file:/C:/Users/Carlos/Documents/NetBeansProjects/GestionClinica/src/gestionclinica/FXMLGestionClinicaController.java</file>
-            <file>file:/C:/Users/Carlos/Documents/NetBeansProjects/GestionClinica/src/gestionclinica/FXMLCalendarioMainController.java</file>
+            <file>file:/C:/Users/Carlos/Documents/NetBeansProjects/GestionClinica/src/Vista/FXMLCalendarioMain.fxml</file>
             <file>file:/C:/Users/Carlos/Documents/NetBeansProjects/GestionClinica/src/gestionclinica/FXMLPacientesMainController.java</file>
             <file>file:/C:/Users/Carlos/Documents/NetBeansProjects/GestionClinica/src/gestionclinica/GestionClinica.java</file>
+            <file>file:/C:/Users/Carlos/Documents/NetBeansProjects/GestionClinica/src/Vista/FXMLGestionClinica.fxml</file>
+            <file>file:/C:/Users/Carlos/Documents/NetBeansProjects/GestionClinica/src/Vista/FXMLMedicosMain.fxml</file>
+            <file>file:/C:/Users/Carlos/Documents/NetBeansProjects/GestionClinica/src/Vista/FXMLPacientesMain.fxml</file>
             <file>file:/C:/Users/Carlos/Documents/NetBeansProjects/GestionClinica/src/gestionclinica/FXMLPacientesAddController.java</file>
+            <file>file:/C:/Users/Carlos/Documents/NetBeansProjects/GestionClinica/src/Vista/FXMLMedicosAdd.fxml</file>
+            <file>file:/C:/Users/Carlos/Documents/NetBeansProjects/GestionClinica/src/Vista/FXMLPacientesAdd.fxml</file>
             <file>file:/C:/Users/Carlos/Documents/NetBeansProjects/GestionClinica/src/gestionclinica/FXMLMedicosMainController.java</file>
         </group>
     </open-files>

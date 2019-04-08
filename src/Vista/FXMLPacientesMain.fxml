@@ -16,7 +16,7 @@
          <right>
             <VBox prefHeight="272.0" prefWidth="118.0" BorderPane.alignment="CENTER">
                <children>
-                  <Button accessibleHelp="Añadir paciente" accessibleText="Añadir paciente" mnemonicParsing="false" prefHeight="47.0" prefWidth="118.0" style="-fx-background-color: rgb(127, 182, 216);">
+                  <Button accessibleHelp="Añadir paciente" accessibleText="Añadir paciente" mnemonicParsing="false" onAction="#addAct" prefHeight="47.0" prefWidth="118.0" style="-fx-background-color: rgb(127, 182, 216);">
                      <graphic>
                         <ImageView fitHeight="43.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -28,7 +28,7 @@
                         <Insets />
                      </VBox.margin>
                   </Button>
-                  <Button accessibleText="Borrar paciente" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="118.0" style="-fx-background-color: rgb(127, 182, 216);">
+                  <Button accessibleText="Borrar paciente" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#delAct" prefHeight="47.0" prefWidth="118.0" style="-fx-background-color: rgb(127, 182, 216);">
                      <graphic>
                         <ImageView fitHeight="43.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -40,7 +40,7 @@
                         <Insets top="20.0" />
                      </VBox.margin>
                   </Button>
-                  <Button accessibleText="Mostrar detalles" layoutX="10.0" layoutY="79.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="118.0" style="-fx-background-color: rgb(127, 182, 216);">
+                  <Button accessibleText="Mostrar detalles" layoutX="10.0" layoutY="79.0" mnemonicParsing="false" onAction="#showAct" prefHeight="47.0" prefWidth="118.0" style="-fx-background-color: rgb(127, 182, 216);">
                      <graphic>
                         <ImageView fitHeight="43.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true">
                            <image>

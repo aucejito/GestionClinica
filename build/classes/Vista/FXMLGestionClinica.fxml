@@ -37,9 +37,9 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Button mnemonicParsing="false" prefHeight="107.0" prefWidth="447.0" style="-fx-background-color: rgb(94, 114, 165);" text="Pacientes" GridPane.columnIndex="1" GridPane.hgrow="NEVER" GridPane.rowIndex="1" GridPane.vgrow="NEVER" />
-                  <Button mnemonicParsing="false" prefHeight="197.0" prefWidth="410.0" style="-fx-background-color: rgb(94, 114, 165);" text="Doctores" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                  <Button mnemonicParsing="false" prefHeight="195.0" prefWidth="406.0" style="-fx-background-color: rgb(94, 114, 165);" text="Calendario Citas" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <Button fx:id="pacientesButton" mnemonicParsing="false" onAction="#pacientesAct" prefHeight="107.0" prefWidth="447.0" style="-fx-background-color: rgb(94, 114, 165);" text="Pacientes" GridPane.columnIndex="1" GridPane.hgrow="NEVER" GridPane.rowIndex="1" GridPane.vgrow="NEVER" />
+                  <Button fx:id="doctoresButton" mnemonicParsing="false" onAction="#doctoresAct" prefHeight="197.0" prefWidth="410.0" style="-fx-background-color: rgb(94, 114, 165);" text="Doctores" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <Button fx:id="calendarioButton" mnemonicParsing="false" onAction="#calendarioAct" prefHeight="195.0" prefWidth="406.0" style="-fx-background-color: rgb(94, 114, 165);" text="Calendario Citas" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                </children>
             </GridPane>
          </center>
