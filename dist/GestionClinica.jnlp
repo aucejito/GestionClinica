@@ -8,7 +8,7 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="GestionClinica.jar" size="968371" download="eager" />
+    <jar href="GestionClinica.jar" size="969501" download="eager" />
     <jar href="lib\clinicDBAccess.jar" size="715055" download="eager" />
     <jar href="lib\controlsfx-8.40.14.jar" size="1215643" download="eager" />
   </resources>

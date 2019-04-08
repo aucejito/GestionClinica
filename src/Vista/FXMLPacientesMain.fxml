@@ -62,7 +62,10 @@
             <TableView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
               <columns>
                 <TableColumn prefWidth="82.0" text="Foto" />
-                <TableColumn prefWidth="269.0" text="Apellidos" />
+                <TableColumn prefWidth="269.0" text="Apellidos">
+                     <graphic>
+                        <ImageView fx:id="myImageView" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                     </graphic></TableColumn>
                   <TableColumn minWidth="0.0" prefWidth="130.0" text="Nombre" />
               </columns>
             </TableView>
