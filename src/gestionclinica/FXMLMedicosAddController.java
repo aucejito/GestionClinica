@@ -16,9 +16,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import model.Patient;
+import org.controlsfx.control.textfield.CustomTextField;
 
 /**
  * FXML Controller class
@@ -27,8 +29,6 @@ import model.Patient;
  */
 public class FXMLMedicosAddController implements Initializable {
 
-    @FXML
-    private ComboBox<?> diasSemana;
     @FXML
     private TextField dniTextField;
     @FXML
@@ -41,12 +41,21 @@ public class FXMLMedicosAddController implements Initializable {
     private Button guardarButton;
     @FXML
     private Button cancelButton;
+    @FXML
+    private CustomTextField horaInicio;
+    @FXML
+    private CustomTextField horaFin;
 
+    private static final Image imgHora = new Image("hora.png");
+    
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        horaInicio.setLeft(new ImageView(imgHora));
+        horaFin.setLeft(new ImageView(imgHora));
+        
         // TODO
     }    
 
