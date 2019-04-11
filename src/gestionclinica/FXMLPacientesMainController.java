@@ -7,14 +7,10 @@
 package gestionclinica;
 
 import DBAccess.ClinicDBAccess;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -22,13 +18,16 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TableView;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.beans.value.ChangeListener ;
+import javafx.scene.control.ComboBox;
 import model.Patient;
+import org.controlsfx.control.textfield.CustomTextField;
 
 /**
  * FXML Controller class
@@ -38,9 +37,13 @@ import model.Patient;
 public class FXMLPacientesMainController implements Initializable {
 
     TableView<Patient> lPatients;
-    @FXML
-    private ImageView myImageView;
     Image avatar;
+    @FXML
+    private ComboBox tipoBusqueda;
+  
+    @FXML
+    private CustomTextField barraBusqueda;
+    
    
     /**
      * Initializes the controller class.
@@ -48,14 +51,17 @@ public class FXMLPacientesMainController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        String urlimg = File.separator+"images"+File.separator+"woman.PNG";
-        avatar = null;
-        try {
-            avatar = new Image(new FileInputStream(urlimg));
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(FXMLPacientesMainController.class.getName()).log(Level.SEVERE, null, ex);
+       String [] options = {"DNI", "Nombre", "Apellido", "Teléfono"};
+       tipoBusqueda.setItems(FXCollections.observableArrayList(options));           
+                        
+        tipoBusqueda.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>(){
+        public void changed(ObservableValue ov, Number value, Number new_value){
+        barraBusqueda.setPromptText("Introduce aquí el "+ options[new_value.intValue()]);
         }
-        myImageView.imageProperty().setValue(avatar); 
+        });
+        
+        
+     
     }    
 
     @FXML
