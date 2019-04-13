@@ -11,18 +11,19 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
 
-<AnchorPane id="AnchorPane" prefHeight="432.0" prefWidth="385.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gestionclinica.FXMLPacientesAddController">
+<AnchorPane id="AnchorPane" prefHeight="440.0" prefWidth="260.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gestionclinica.FXMLPacientesAddController">
    <children>
-      <ImageView fitHeight="433.0" fitWidth="385.0" opacity="0.3" pickOnBounds="true">
+      <ImageView fitHeight="450.0" fitWidth="310.0" layoutY="-7.0" opacity="0.3" pickOnBounds="true">
          <image>
             <Image url="@../attractive-backdrop-background-988872.jpg" />
          </image>
       </ImageView>
-      <GridPane prefHeight="433.0" prefWidth="360.0">
+      <GridPane layoutY="-3.0" prefHeight="443.0" prefWidth="310.0">
         <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="328.0" minWidth="10.0" prefWidth="95.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="328.0" minWidth="10.0" prefWidth="290.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="328.0" minWidth="10.0" prefWidth="101.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="328.0" minWidth="10.0" prefWidth="218.0" />
         </columnConstraints>
         <rowConstraints>
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -45,22 +46,23 @@
                </GridPane.margin></Button>
             <HBox prefHeight="71.0" prefWidth="290.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
                <children>
-                  <Button fx:id="guardarButton" defaultButton="true" mnemonicParsing="false" onAction="#guardarAct" prefHeight="33.0" prefWidth="99.0" text="Guardar">
-                     <HBox.margin>
-                        <Insets left="40.0" top="50.0" />
-                     </HBox.margin>
-                  </Button>
-                  <Button fx:id="cancelButton" cancelButton="true" layoutX="50.0" layoutY="60.0" mnemonicParsing="false" onAction="#CancelAct" prefHeight="33.0" prefWidth="99.0" text="Cancelar">
-                     <HBox.margin>
-                        <Insets left="20.0" top="50.0" />
-                     </HBox.margin>
-                  </Button>
+                  <StackPane prefHeight="108.0" prefWidth="151.0">
+                     <children>
+                        <Button fx:id="salirButton" alignment="CENTER" defaultButton="true" layoutX="33.0" layoutY="48.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" prefHeight="33.0" prefWidth="99.0" text="Salir" StackPane.alignment="CENTER" />
+                        <Button fx:id="guardarButton" defaultButton="true" mnemonicParsing="false" onAction="#guardarAct" prefHeight="33.0" prefWidth="99.0" text="Guardar" />
+                     </children>
+                  </StackPane>
+                  <StackPane prefHeight="102.0" prefWidth="142.0">
+                     <children>
+                        <Button fx:id="cancelButton" cancelButton="true" mnemonicParsing="false" onAction="#CancelAct" prefHeight="33.0" prefWidth="99.0" text="Cancelar" />
+                     </children>
+                  </StackPane>
                </children>
             </HBox>
-            <TextField fx:id="dniTextField" GridPane.columnIndex="1" />
-            <TextField fx:id="nombreTextField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextField fx:id="apellidosTextField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <TextField fx:id="telefonoTextField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <TextField fx:id="dniTextField" maxWidth="-Infinity" prefWidth="150.0" GridPane.columnIndex="1" />
+            <TextField fx:id="nombreTextField" maxWidth="-Infinity" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="apellidosTextField" maxHeight="-Infinity" maxWidth="-Infinity" prefWidth="183.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField fx:id="telefonoTextField" maxWidth="-Infinity" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <Label fx:id="selArchivoLabel" prefHeight="17.0" prefWidth="174.0" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="4" />
          </children>
       </GridPane>

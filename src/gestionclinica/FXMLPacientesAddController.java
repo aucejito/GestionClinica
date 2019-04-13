@@ -43,6 +43,8 @@ public class FXMLPacientesAddController implements Initializable {
     private Button guardarButton;
     @FXML
     private Label selArchivoLabel;
+    @FXML
+    private Button salirButton;
 
     
     
@@ -52,9 +54,22 @@ public class FXMLPacientesAddController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        if(FXMLPacientesMainController.editable == false){
+            dniTextField.setEditable(false);
+            nombreTextField.setEditable(false);
+            apellidosTextField.setEditable(false);
+            telefonoTextField.setEditable(false);
+            salirButton.setVisible(true);
+            cancelButton.setVisible(false);
+            guardarButton.setVisible(false);
+            
+        }else{
+        salirButton.setVisible(false);
+        cancelButton.setVisible(true);
+        guardarButton.setVisible(true);
+        }
         
-        
-//"Lunes", "Martes","Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"));
+
     }    
     
    

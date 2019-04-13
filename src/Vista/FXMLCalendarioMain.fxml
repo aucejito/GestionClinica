@@ -2,19 +2,22 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import org.controlsfx.control.textfield.CustomTextField?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gestionclinica.FXMLCalendarioMainController">
+<AnchorPane id="AnchorPane" fx:id="scene" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gestionclinica.FXMLMedicosMainController">
    <children>
-      <BorderPane prefHeight="400.0" prefWidth="600.0">
+      <BorderPane fx:id="borderPane" prefHeight="400.0" prefWidth="600.0">
          <right>
-            <VBox prefHeight="440.0" prefWidth="118.0" BorderPane.alignment="CENTER">
+            <VBox prefHeight="454.0" prefWidth="118.0" BorderPane.alignment="CENTER">
                <children>
-                  <Button accessibleHelp="Añadir paciente" accessibleText="Añadir paciente" mnemonicParsing="false" prefHeight="47.0" prefWidth="118.0" style="-fx-background-color: rgb(239, 242, 242);" text="añadir">
+                  <Button accessibleHelp="Añadir paciente" accessibleText="Añadir paciente" mnemonicParsing="false" onAction="#addAct" prefHeight="47.0" prefWidth="118.0" style="-fx-background-color: rgb(239, 242, 242);" text="añadir">
                      <VBox.margin>
                         <Insets />
                      </VBox.margin>
@@ -24,7 +27,7 @@
                         <Insets top="20.0" />
                      </VBox.margin>
                   </Button>
-                  <Button accessibleHelp="Añadir paciente" accessibleText="Añadir paciente" layoutX="10.0" layoutY="57.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="118.0" style="-fx-background-color: rgb(239, 242, 242);" text="mostrar">
+                  <Button accessibleHelp="Añadir paciente" accessibleText="Añadir paciente" layoutX="10.0" layoutY="57.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="118.0" style="-fx-background-color: rgb(239, 242, 242);" text="modificar">
                      <VBox.margin>
                         <Insets top="20.0" />
                      </VBox.margin>
@@ -34,17 +37,44 @@
                   <Insets top="30.0" />
                </padding>
                <BorderPane.margin>
-                  <Insets />
+                  <Insets left="5.0" right="5.0" />
                </BorderPane.margin>
             </VBox>
          </right>
+         <top>
+            <HBox prefHeight="25.0" prefWidth="747.0" BorderPane.alignment="CENTER">
+               <BorderPane.margin>
+                  <Insets bottom="5.0" left="5.0" top="10.0" />
+               </BorderPane.margin>
+               <children>
+                  <ComboBox fx:id="tipoBusqueda" prefHeight="25.0" prefWidth="109.0" promptText="Filtrar...">
+                     <HBox.margin>
+                        <Insets right="5.0" />
+                     </HBox.margin>
+                  </ComboBox>
+                  <CustomTextField fx:id="barraBusqueda" prefHeight="25.0" prefWidth="265.0" promptText="Introduce aquí el">
+                     <HBox.margin>
+                        <Insets right="5.0" />
+                     </HBox.margin>
+                  </CustomTextField>
+                  <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="84.0" text="Buscar" />
+               </children>
+            </HBox>
+         </top>
          <center>
             <TableView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
               <columns>
-                <TableColumn prefWidth="82.0" text="Foto" />
-                <TableColumn prefWidth="269.0" text="Apellidos" />
-                  <TableColumn minWidth="0.0" prefWidth="130.0" text="Nombre" />
+                <TableColumn prefWidth="67.0" text="Lunes" />
+                <TableColumn prefWidth="67.0" text="Martes" />
+                  <TableColumn prefWidth="67.0" text="Miércoles" />
+                  <TableColumn prefWidth="67.0" text="Jueves" />
+                  <TableColumn prefWidth="67.0" text="Viernes" />
+                  <TableColumn prefWidth="67.0" text="Sábado" />
+                  <TableColumn prefWidth="67.0" text="Domingo" />
               </columns>
+               <BorderPane.margin>
+                  <Insets bottom="5.0" left="5.0" top="5.0" />
+               </BorderPane.margin>
             </TableView>
          </center>
       </BorderPane>
