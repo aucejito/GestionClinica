@@ -27,6 +27,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.beans.value.ChangeListener ;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TableCell;
@@ -71,6 +72,7 @@ public class FXMLPacientesMainController implements Initializable {
     private TableColumn<Patient, String> columnaDNI;
     
    ArrayList<Patient> pacientes;
+   static Patient current;
     
     /**
      * Initializes the controller class.
@@ -173,7 +175,7 @@ public class FXMLPacientesMainController implements Initializable {
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.showAndWait();
         
-        ClinicDBAccess clinicDBAccess = ClinicDBAccess.getSingletonClinicDBAccess();
+        /*ClinicDBAccess clinicDBAccess = ClinicDBAccess.getSingletonClinicDBAccess();
         ObservableList<Patient> patientsObservableList;
         //Envolvemos el ArrayList de pacientes de de la clínica en una ObservableList
         patientsObservableList = FXCollections.observableList(clinicDBAccess.getPatients());
@@ -181,24 +183,34 @@ public class FXMLPacientesMainController implements Initializable {
         lPatients.setItems(patientsObservableList); //Se conecta la lista con el ListView
         Patient patient = new Patient("5307867J","Juan","Cafe Grandes","9376543",avatar);
         patientsObservableList.add(patient); //Se añade un Nuevo paciente
-        clinicDBAccess.saveDB(); //Se almacena el cambio en el fichero XML
+        clinicDBAccess.saveDB(); //Se almacena el cambio en el fichero XML*/
     }
 
     @FXML
     private void delAct(ActionEvent event) {
+        current = tablaPacientes.getSelectionModel().getSelectedItem();
+        if(ClinicDBAccess.getSingletonClinicDBAccess().hasAppointments(current)){
+            Alert alertAmazon = new Alert(Alert.AlertType.INFORMATION);
+            alertAmazon.setTitle("Error");
+            alertAmazon.setHeaderText("No se puede borrar este paciente");
+            alertAmazon.setContentText("Por favor, compruebe que el paciente no tiene ninguna cita concertada");
+            alertAmazon.showAndWait();
+        } else {
+            //borrar paciente (?)
+        }
     }
 
     @FXML
     private void showAct(ActionEvent event) throws IOException {
         editable = false;
+        current = tablaPacientes.getSelectionModel().getSelectedItem();
         FXMLLoader miCargador = new FXMLLoader(getClass().getResource("/Vista/FXMLPacientesAdd.fxml"));
-        AnchorPane root = (AnchorPane) miCargador.load();
-
-        
+        AnchorPane root = (AnchorPane) miCargador.load();   
+               
         Scene scene = new Scene(root);
         Stage stage = new Stage();
         stage.setScene(scene);
-        stage.setTitle("Modificar paciente");
+        stage.setTitle("Mostrar detalles paciente");
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.showAndWait();
         

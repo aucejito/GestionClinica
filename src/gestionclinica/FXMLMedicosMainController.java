@@ -6,6 +6,7 @@
 package gestionclinica;
 
 import DBAccess.ClinicDBAccess;
+import static gestionclinica.FXMLPacientesMainController.current;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
@@ -51,7 +53,7 @@ public class FXMLMedicosMainController implements Initializable {
     private CustomTextField barraBusqueda;
     private static final Image imgLupa = new Image("loupe.png");
     @FXML
-    private TableView<Doctor> tablaDoctores;
+     TableView<Doctor> tablaDoctores;
     @FXML
     private TableColumn<Doctor, Image> columnaFoto;
     @FXML
@@ -62,6 +64,8 @@ public class FXMLMedicosMainController implements Initializable {
     private TableColumn<Doctor, String> columnaApellidos;
     
     ArrayList<Doctor> doctores;
+    static boolean editableM;
+    static Doctor currentM;
     
     /**
      * Initializes the controller class.
@@ -71,7 +75,7 @@ public class FXMLMedicosMainController implements Initializable {
         // TODO
         String [] options = {"DNI", "Nombre", "Apellido", "Teléfono"};
         
-       tipoBusqueda.setItems(FXCollections.observableArrayList(options));           
+        tipoBusqueda.setItems(FXCollections.observableArrayList(options));           
                         
         tipoBusqueda.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>(){
         public void changed(ObservableValue ov, Number value, Number new_value){
@@ -84,6 +88,7 @@ public class FXMLMedicosMainController implements Initializable {
         borderPane.prefWidthProperty().bind(scene.widthProperty());
         
         ClinicDBAccess datosClinica = ClinicDBAccess.getSingletonClinicDBAccess();
+        currentM = tablaDoctores.getSelectionModel().getSelectedItem();
         doctores = datosClinica.getDoctors();
         tablaDoctores.setItems(FXCollections.observableList(doctores));
         columnaFoto.setCellValueFactory(celda1 -> new SimpleObjectProperty<>(celda1.getValue().getPhoto()));
@@ -151,6 +156,7 @@ public class FXMLMedicosMainController implements Initializable {
 
     @FXML
     private void addAct(ActionEvent event) throws IOException {
+        editableM = true;
         FXMLLoader miCargador = new FXMLLoader(getClass().getResource("/Vista/FXMLMedicosAdd.fxml"));
         AnchorPane root = (AnchorPane) miCargador.load();
 
@@ -160,6 +166,37 @@ public class FXMLMedicosMainController implements Initializable {
         Stage stage = new Stage();
         stage.setScene(scene);
         stage.setTitle("Añadir Médico");
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.showAndWait();
+        
+        
+    }
+
+    @FXML
+    private void delAct(ActionEvent event) {
+        currentM = tablaDoctores.getSelectionModel().getSelectedItem();
+        if(ClinicDBAccess.getSingletonClinicDBAccess().hasAppointments(currentM)){
+            Alert alertAmazon = new Alert(Alert.AlertType.INFORMATION);
+            alertAmazon.setTitle("Error");
+            alertAmazon.setHeaderText("No se puede borrar este doctor");
+            alertAmazon.setContentText("Por favor, compruebe que el doctor no tiene ninguna cita concertada");
+            alertAmazon.showAndWait();
+        } else {
+            //borrar doctor (?)
+        }
+    }
+
+    @FXML
+    private void showAct(ActionEvent event) throws IOException {
+        editableM = false;
+        currentM = tablaDoctores.getSelectionModel().getSelectedItem();
+        FXMLLoader miCargador = new FXMLLoader(getClass().getResource("/Vista/FXMLMedicosAdd.fxml"));
+        AnchorPane root = (AnchorPane) miCargador.load();   
+               
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.setTitle("Mostrar detalles doctor");
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.showAndWait();
     }

@@ -22,6 +22,7 @@ import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 import model.Patient;
 
+
 /**
  * FXML Controller class
  *
@@ -62,6 +63,11 @@ public class FXMLPacientesAddController implements Initializable {
             salirButton.setVisible(true);
             cancelButton.setVisible(false);
             guardarButton.setVisible(false);
+            
+            dniTextField.setText(FXMLPacientesMainController.current.getIdentifier());
+            nombreTextField.setText(FXMLPacientesMainController.current.getName());
+            apellidosTextField.setText(FXMLPacientesMainController.current.getSurname());
+            telefonoTextField.setText(FXMLPacientesMainController.current.getTelephon());
             
         }else{
         salirButton.setVisible(false);
@@ -131,9 +137,9 @@ public class FXMLPacientesAddController implements Initializable {
         fileChooser.getExtensionFilters().addAll(
         new ExtensionFilter("Image Files", "*.png", "*.jpeg","*.jpg", "*.gif"));
         File selectedFile = fileChooser.showOpenDialog(null);
-        if (selectedFile != null) {
+        /*if (selectedFile != null) {
         selArchivoLabel.setText(selectedFile.getAbsolutePath());
-        }
+        }*/
     }
 }
 

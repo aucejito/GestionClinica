@@ -11,6 +11,7 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
 <?import org.controlsfx.control.CheckComboBox?>
 <?import org.controlsfx.control.textfield.CustomTextField?>
 
@@ -51,17 +52,22 @@
             <TextField fx:id="nombreTextField" layoutX="92.0" layoutY="27.0" maxWidth="-Infinity" prefHeight="25.0" prefWidth="150.0" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="1" />
             <TextField fx:id="apellidosTextField" layoutX="92.0" layoutY="87.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="183.0" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="2" />
             <TextField fx:id="telefonoTextField" layoutX="92.0" layoutY="146.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="150.0" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="3" />
-            <Button fx:id="guardarButton" defaultButton="true" mnemonicParsing="false" onAction="#guardarAct" prefHeight="25.0" prefWidth="70.0" text="Guardar" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="9" />
+            <StackPane prefHeight="49.0" prefWidth="43.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="9">
+               <children>
+                  <Button fx:id="salirButton" defaultButton="true" mnemonicParsing="false" onAction="#salirAct" prefHeight="25.0" prefWidth="70.0" text="Salir" StackPane.alignment="CENTER_LEFT" />
+                  <Button fx:id="guardarButton" defaultButton="true" mnemonicParsing="false" onAction="#guardarAct" prefHeight="25.0" prefWidth="70.0" text="Guardar" StackPane.alignment="CENTER_LEFT" />
+               </children>
+            </StackPane>
             <Button fx:id="cancelButton" cancelButton="true" mnemonicParsing="false" onAction="#cancelarAct" prefHeight="25.0" prefWidth="70.0" text="Cancelar" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="9">
                <GridPane.margin>
                   <Insets right="15.0" />
                </GridPane.margin></Button>
-            <CheckComboBox prefHeight="25.0" prefWidth="150.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="LEFT" GridPane.rowIndex="5" />
+            <CheckComboBox fx:id="diasComboBox" prefHeight="25.0" prefWidth="150.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="LEFT" GridPane.rowIndex="5" />
             <Label contentDisplay="CENTER" style="-fx-font-size: 15;" text="Hora inicio" textAlignment="RIGHT" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
             <Label contentDisplay="CENTER" style="-fx-font-size: 15;" text="Hora fin" textAlignment="RIGHT" GridPane.halignment="CENTER" GridPane.rowIndex="7" />
             <CustomTextField fx:id="horaInicio" maxHeight="-Infinity" maxWidth="-Infinity" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
             <CustomTextField fx:id="horaFin" maxWidth="-Infinity" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-            <ComboBox prefHeight="25.0" prefWidth="150.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="LEFT" GridPane.rowIndex="8" />
+            <ComboBox fx:id="consultaComboBox" prefHeight="25.0" prefWidth="150.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="LEFT" GridPane.rowIndex="8" />
             <Label contentDisplay="CENTER" layoutX="16.0" layoutY="346.0" style="-fx-font-size: 15;" text="Consulta" textAlignment="RIGHT" GridPane.halignment="CENTER" GridPane.rowIndex="8" />
             <Label alignment="CENTER" contentDisplay="CENTER" layoutX="33.0" layoutY="234.0" style="-fx-font-size: 15;" text="Días" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
          </children>
