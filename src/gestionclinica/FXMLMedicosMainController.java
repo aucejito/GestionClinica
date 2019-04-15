@@ -10,6 +10,7 @@ import static gestionclinica.FXMLPacientesMainController.current;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ChangeListener;
@@ -21,6 +22,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
@@ -66,6 +68,11 @@ public class FXMLMedicosMainController implements Initializable {
     ArrayList<Doctor> doctores;
     static boolean editableM;
     static Doctor currentM;
+    @FXML
+    private Button delButton;
+    @FXML
+    private Button showButton;
+    
     
     /**
      * Initializes the controller class.
@@ -152,6 +159,8 @@ public class FXMLMedicosMainController implements Initializable {
             
             };
         });
+        delButton.disableProperty().bind(tablaDoctores.getSelectionModel().selectedIndexProperty().isEqualTo(-1));
+        showButton.disableProperty().bind(tablaDoctores.getSelectionModel().selectedIndexProperty().isEqualTo(-1));
     }    
 
     @FXML
@@ -170,6 +179,8 @@ public class FXMLMedicosMainController implements Initializable {
         stage.showAndWait();
         
         
+        
+        
     }
 
     @FXML
@@ -183,6 +194,7 @@ public class FXMLMedicosMainController implements Initializable {
             alertAmazon.showAndWait();
         } else {
             //borrar doctor (?)
+            doctores.remove(tablaDoctores.getSelectionModel().getSelectedIndex());
         }
     }
 
@@ -201,4 +213,42 @@ public class FXMLMedicosMainController implements Initializable {
         stage.showAndWait();
     }
     
+    
+    
+    
+    
+    
+    /* private void filtrar(String nombre){
+    System.out.print("Lista> ");
+    ArrayList<Patient> personas = ClinicDBAccess.getSingletonClinicDBAccess().getPatients();
+    List<Patient> solucion = new ArrayList<Patient>();
+    String[] noms = nombre.trim().split(" ");
+    if(noms.length > 0){//>=
+    for(int i = 0; i < personas.size(); i ++){
+    for(int j = 0; j < noms.length; j ++){
+    if(filtrarPaciente(noms[j].trim().toLowerCase(), personas.get(i).getName().trim().toLowerCase(), personas.get(i).getSurname().trim().toLowerCase())){
+    solucion.add(personas.get(i));
+    lista_pacientes_o = FXCollections.observableArrayList(solucion);
+    lista_pacientes.setItems(lista_pacientes_o);
+    }
+    }
+    }
+    }else {
+    System.err.println("Error 2");
+    }
+    }
+    private  boolean filtrarPaciente(String field, String nombre, String apellido){
+    //encuentro apellidos
+    String[] terminos = field.trim().split(" ");
+    String[] apellidos = apellido.trim().split(" ");
+    try {
+    for(int i = 0; i < terminos.length; i ++){//field
+    for(int j = 0; j < apellidos.length; j ++){
+    if(terminos[i].equals(apellidos[j]) || terminos[i].equals(nombre)) return true;
+    }
+    }
+    }catch(Exception e){System.err.println("FUCKKK!!");}
+    
+    return false;
+    }*/
 }

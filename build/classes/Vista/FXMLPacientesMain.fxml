@@ -31,7 +31,7 @@
                         <Insets />
                      </VBox.margin>
                   </Button>
-                  <Button accessibleText="Borrar paciente" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#delAct" prefHeight="47.0" prefWidth="118.0" style="-fx-background-color: rgb(127, 182, 216);">
+                  <Button fx:id="delButton" accessibleText="Borrar paciente" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#delAct" prefHeight="47.0" prefWidth="118.0" style="-fx-background-color: rgb(127, 182, 216);">
                      <graphic>
                         <ImageView fitHeight="43.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -43,7 +43,7 @@
                         <Insets top="20.0" />
                      </VBox.margin>
                   </Button>
-                  <Button accessibleText="Mostrar detalles" layoutX="10.0" layoutY="79.0" mnemonicParsing="false" onAction="#showAct" prefHeight="47.0" prefWidth="118.0" style="-fx-background-color: rgb(127, 182, 216);">
+                  <Button fx:id="showButton" accessibleText="Mostrar detalles" layoutX="10.0" layoutY="79.0" mnemonicParsing="false" onAction="#showAct" prefHeight="47.0" prefWidth="118.0" style="-fx-background-color: rgb(127, 182, 216);">
                      <graphic>
                         <ImageView fitHeight="43.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true">
                            <image>

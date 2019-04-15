@@ -23,6 +23,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.effect.Glow;
+import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
 
 /**
@@ -56,7 +57,7 @@ public class FXMLGestionClinicaController implements Initializable {
         gridPane.prefHeightProperty().bind(anchorPane.heightProperty());
         gridPane.prefWidthProperty().bind(anchorPane.widthProperty());
         bloom.setLevel(0.5);
-         
+        
     }    
 
     @FXML

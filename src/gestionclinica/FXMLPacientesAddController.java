@@ -8,7 +8,9 @@ package gestionclinica;
 
 import java.io.File;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -46,7 +48,10 @@ public class FXMLPacientesAddController implements Initializable {
     private Label selArchivoLabel;
     @FXML
     private Button salirButton;
-
+    
+    ArrayList<Patient> listaPacientes;
+    
+    Image img = null;
     
     
     
@@ -55,6 +60,7 @@ public class FXMLPacientesAddController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
         if(FXMLPacientesMainController.editable == false){
             dniTextField.setEditable(false);
             nombreTextField.setEditable(false);
@@ -113,8 +119,8 @@ public class FXMLPacientesAddController implements Initializable {
             alertAmazon.setContentText("No se puede guardar el paciente si no introduce el teléfono");
             alertAmazon.showAndWait();
         }else{
-            Image img = null;
-            Patient x = new Patient(dniTextField.getText(), nombreTextField.getText(), apellidosTextField.getText(), telefonoTextField.getText(), img);
+            Patient nuevoPaciente = new Patient(dniTextField.getText(), nombreTextField.getText(), apellidosTextField.getText(), telefonoTextField.getText(), img);
+            listaPacientes.add(nuevoPaciente);
             Stage stage = (Stage) cancelButton.getScene().getWindow();
             stage.close();
         }
@@ -140,6 +146,7 @@ public class FXMLPacientesAddController implements Initializable {
         /*if (selectedFile != null) {
         selArchivoLabel.setText(selectedFile.getAbsolutePath());
         }*/
+        img = new Image(selectedFile.toURI().toString());
     }
 }
 

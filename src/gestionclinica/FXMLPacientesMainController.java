@@ -28,6 +28,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.beans.value.ChangeListener ;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TableCell;
@@ -73,6 +74,10 @@ public class FXMLPacientesMainController implements Initializable {
     
    ArrayList<Patient> pacientes;
    static Patient current;
+    @FXML
+    private Button delButton;
+    @FXML
+    private Button showButton;
     
     /**
      * Initializes the controller class.
@@ -80,6 +85,7 @@ public class FXMLPacientesMainController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+       
        String [] options = {"DNI", "Nombre", "Apellido", "Teléfono"};
        
        tipoBusqueda.setItems(FXCollections.observableArrayList(options));           
@@ -158,6 +164,8 @@ public class FXMLPacientesMainController implements Initializable {
             
             };
         });
+        delButton.disableProperty().bind(tablaPacientes.getSelectionModel().selectedIndexProperty().isEqualTo(-1));
+        showButton.disableProperty().bind(tablaPacientes.getSelectionModel().selectedIndexProperty().isEqualTo(-1));
     }   
 
     @FXML
@@ -197,6 +205,7 @@ public class FXMLPacientesMainController implements Initializable {
             alertAmazon.showAndWait();
         } else {
             //borrar paciente (?)
+            pacientes.remove(tablaPacientes.getSelectionModel().getSelectedIndex());
         }
     }
 
