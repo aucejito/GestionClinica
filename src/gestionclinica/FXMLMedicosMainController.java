@@ -16,6 +16,7 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -72,6 +73,8 @@ public class FXMLMedicosMainController implements Initializable {
     private Button delButton;
     @FXML
     private Button showButton;
+    ClinicDBAccess clinicDBAccess = ClinicDBAccess.getSingletonClinicDBAccess();
+    ObservableList<Doctor> doctorsObservableList;
     
     
     /**
@@ -178,7 +181,9 @@ public class FXMLMedicosMainController implements Initializable {
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.showAndWait();
         
-        
+        if(FXMLMedicosAddController.guardadoD == true){
+            tablaDoctores.setItems(doctorsObservableList);
+        }
         
         
     }

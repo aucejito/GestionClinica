@@ -9,9 +9,12 @@ import DBAccess.ClinicDBAccess;
 import java.io.File;
 import java.net.URL;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -23,7 +26,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import model.Days;
 import model.Doctor;
+import model.ExaminationRoom;
 import model.LocalTimeAdapter;
 import model.Patient;
 import org.controlsfx.control.CheckComboBox;
@@ -57,11 +62,19 @@ public class FXMLMedicosAddController implements Initializable {
     @FXML
     private Button salirButton;
     @FXML
-    private CheckComboBox<?> diasComboBox;
+    private CheckComboBox<Days> diasComboBox;
     @FXML
-    private ComboBox<?> consultaComboBox;
+    private ComboBox<String> consultaComboBox;
     
+      
     LocalTimeAdapter lTAdapter = new LocalTimeAdapter();
+    ClinicDBAccess clinicDBAccess = ClinicDBAccess.getSingletonClinicDBAccess();
+    ObservableList<Doctor> doctorsObservableList;
+    ArrayList<ExaminationRoom> consultas;
+    ExaminationRoom examRoom = new ExaminationRoom();
+    ArrayList<Integer> idConsultas;
+    
+    static boolean guardadoD;
     
     /**
      * Initializes the controller class.
@@ -71,7 +84,12 @@ public class FXMLMedicosAddController implements Initializable {
         horaInicio.setLeft(new ImageView(imgHora));
         horaFin.setLeft(new ImageView(imgHora));
         
-        
+        diasComboBox.getItems().addAll(Days.Monday, Days.Tuesday, Days.Wednesday, Days.Thursday, Days.Friday);
+        consultas =  clinicDBAccess.getExaminationRooms();
+                 
+        for(int i = 0; i < consultas.size(); i++){
+            consultaComboBox.getItems().addAll("Consulta " + consultas.get(i).getIdentNumber());
+        }
         
         if(FXMLMedicosMainController.editableM == false){
             dniTextField.setEditable(false);
@@ -109,7 +127,7 @@ public class FXMLMedicosAddController implements Initializable {
     }    
 
     @FXML
-    private void guardarAct(ActionEvent event) {
+    private void guardarAct(ActionEvent event) throws Exception {
         if (dniTextField.getText().isEmpty()){
             Alert alertAmazon = new Alert(Alert.AlertType.INFORMATION);
             alertAmazon.setTitle("Faltan datos");
@@ -136,9 +154,20 @@ public class FXMLMedicosAddController implements Initializable {
             alertAmazon.showAndWait();
         }else{
             Image img = null;
-           // Doctor x = new Doctor(consultaComboBox.getValue(), diasComboBox.getCheckModel().getCheckedItems(), lTAdapter.unmarshal(horaInicio.getText()),lTAdapter.unmarshal(horaFin.getText()) ,dniTextField.getText(), nombreTextField.getText(), apellidosTextField.getText(), telefonoTextField.getText(), img);
+            int i = Integer.parseInt(consultaComboBox.getValue().substring(9));
+            /*
+            for(int j = 0; i < 4; i++){
+            ObservableList<Days> dias;
+            dias = Days.valueOf(FXCollections.observableArrayList(diasComboBox.getCheckModel().getCheckedItems()).indexOf(j));
+            }
+            Doctor nuevoDoctor = new Doctor(consultas.get(i), dias, lTAdapter.unmarshal(horaInicio.getText()),lTAdapter.unmarshal(horaFin.getText()) ,
+            dniTextField.getText(), nombreTextField.getText(), apellidosTextField.getText(), telefonoTextField.getText(), img);
+            */
             Stage stage = (Stage) cancelButton.getScene().getWindow();
             stage.close();
+            doctorsObservableList = FXCollections.observableList(clinicDBAccess.getDoctors());
+           // doctorsObservableList.add(nuevoDoctor);
+            guardadoD = true;
         }
     }
 

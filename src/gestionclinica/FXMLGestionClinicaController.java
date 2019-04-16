@@ -5,6 +5,7 @@
  */
 package gestionclinica;
 
+import DBAccess.ClinicDBAccess;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -50,6 +51,8 @@ public class FXMLGestionClinicaController implements Initializable {
     private AnchorPane anchorPane;
     @FXML
     private GridPane gridPane;
+    
+    ClinicDBAccess clinicDBAccess = ClinicDBAccess.getSingletonClinicDBAccess();
        
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -73,6 +76,7 @@ public class FXMLGestionClinicaController implements Initializable {
         stage.setTitle("Pacientes");
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.showAndWait();
+        clinicDBAccess.saveDB();
     }
 
     @FXML
@@ -88,6 +92,7 @@ public class FXMLGestionClinicaController implements Initializable {
         stage.setTitle("Doctores");
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.showAndWait();
+        clinicDBAccess.saveDB();
     }
 
     @FXML
@@ -103,6 +108,7 @@ public class FXMLGestionClinicaController implements Initializable {
         stage.setTitle("Calendario Citas");
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.showAndWait();
+        clinicDBAccess.saveDB();
     }
 
     @FXML

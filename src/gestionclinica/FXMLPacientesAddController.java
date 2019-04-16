@@ -6,10 +6,12 @@
 package gestionclinica;
 
 
+import DBAccess.ClinicDBAccess;
 import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -52,6 +54,11 @@ public class FXMLPacientesAddController implements Initializable {
     ArrayList<Patient> listaPacientes;
     
     Image img = null;
+    
+    static boolean guardadoP = false;
+    
+    ClinicDBAccess clinicDBAccess = ClinicDBAccess.getSingletonClinicDBAccess();
+    ObservableList<Patient> patientsObservableList;
     
     
     
@@ -120,9 +127,12 @@ public class FXMLPacientesAddController implements Initializable {
             alertAmazon.showAndWait();
         }else{
             Patient nuevoPaciente = new Patient(dniTextField.getText(), nombreTextField.getText(), apellidosTextField.getText(), telefonoTextField.getText(), img);
-            listaPacientes.add(nuevoPaciente);
             Stage stage = (Stage) cancelButton.getScene().getWindow();
             stage.close();
+            
+            patientsObservableList = FXCollections.observableList(clinicDBAccess.getPatients());
+            patientsObservableList.add(nuevoPaciente);
+            guardadoP = true;
         }
                
         
@@ -134,6 +144,7 @@ public class FXMLPacientesAddController implements Initializable {
     private void CancelAct(ActionEvent event) {
         Stage stage = (Stage) cancelButton.getScene().getWindow();
         stage.close();
+        guardadoP = false;
     }
 
     @FXML

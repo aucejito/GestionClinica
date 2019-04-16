@@ -79,14 +79,18 @@ public class FXMLPacientesMainController implements Initializable {
     @FXML
     private Button showButton;
     
+    ClinicDBAccess clinicDBAccess = ClinicDBAccess.getSingletonClinicDBAccess();
+    ObservableList<Patient> patientsObservableList;
+    
+    
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-       
-       String [] options = {"DNI", "Nombre", "Apellido", "Teléfono"};
+       patientsObservableList = FXCollections.observableList(clinicDBAccess.getPatients());
+       String [] options = {"DNI", "Nombre", "Apellido"};
        
        tipoBusqueda.setItems(FXCollections.observableArrayList(options));           
                         
@@ -100,6 +104,68 @@ public class FXMLPacientesMainController implements Initializable {
         borderPane.prefHeightProperty().bind(scene.heightProperty());
         borderPane.prefWidthProperty().bind(scene.widthProperty());
         
+        inicializarTabla();
+        
+        delButton.disableProperty().bind(tablaPacientes.getSelectionModel().selectedIndexProperty().isEqualTo(-1));
+        showButton.disableProperty().bind(tablaPacientes.getSelectionModel().selectedIndexProperty().isEqualTo(-1));
+    }   
+
+    @FXML
+    private void addAct(ActionEvent event) throws IOException {
+        editable = true;
+        
+            
+        FXMLLoader miCargador = new FXMLLoader(getClass().getResource("/Vista/FXMLPacientesAdd.fxml"));
+        AnchorPane root = (AnchorPane) miCargador.load();
+
+            
+
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.setTitle("Añadir paciente");
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.showAndWait();
+        if(FXMLPacientesAddController.guardadoP == true){
+            tablaPacientes.setItems(patientsObservableList);
+        }
+        
+    }
+
+    @FXML
+    private void delAct(ActionEvent event) {
+        current = tablaPacientes.getSelectionModel().getSelectedItem();
+        if(ClinicDBAccess.getSingletonClinicDBAccess().hasAppointments(current)){
+            Alert alertAmazon = new Alert(Alert.AlertType.INFORMATION);
+            alertAmazon.setTitle("Error");
+            alertAmazon.setHeaderText("No se puede borrar este paciente");
+            alertAmazon.setContentText("Por favor, compruebe que el paciente no tiene ninguna cita concertada");
+            alertAmazon.showAndWait();
+        } else {
+            //borrar paciente (?)
+            patientsObservableList.remove(current);
+            tablaPacientes.setItems(patientsObservableList);
+            
+        }
+    }
+
+    @FXML
+    private void showAct(ActionEvent event) throws IOException {
+        editable = false;
+        current = tablaPacientes.getSelectionModel().getSelectedItem();
+        FXMLLoader miCargador = new FXMLLoader(getClass().getResource("/Vista/FXMLPacientesAdd.fxml"));
+        AnchorPane root = (AnchorPane) miCargador.load();   
+               
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.setTitle("Mostrar detalles paciente");
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.showAndWait();
+        
+    }
+
+    private void inicializarTabla(){
         ClinicDBAccess datosClinica = ClinicDBAccess.getSingletonClinicDBAccess();
         pacientes = datosClinica.getPatients();
         tablaPacientes.setItems(FXCollections.observableList(pacientes));
@@ -164,68 +230,7 @@ public class FXMLPacientesMainController implements Initializable {
             
             };
         });
-        delButton.disableProperty().bind(tablaPacientes.getSelectionModel().selectedIndexProperty().isEqualTo(-1));
-        showButton.disableProperty().bind(tablaPacientes.getSelectionModel().selectedIndexProperty().isEqualTo(-1));
-    }   
-
-    @FXML
-    private void addAct(ActionEvent event) throws IOException {
-        editable = true;
-        FXMLLoader miCargador = new FXMLLoader(getClass().getResource("/Vista/FXMLPacientesAdd.fxml"));
-        AnchorPane root = (AnchorPane) miCargador.load();
-
-            
-
-        Scene scene = new Scene(root);
-        Stage stage = new Stage();
-        stage.setScene(scene);
-        stage.setTitle("Añadir paciente");
-        stage.initModality(Modality.APPLICATION_MODAL);
-        stage.showAndWait();
-        
-        /*ClinicDBAccess clinicDBAccess = ClinicDBAccess.getSingletonClinicDBAccess();
-        ObservableList<Patient> patientsObservableList;
-        //Envolvemos el ArrayList de pacientes de de la clínica en una ObservableList
-        patientsObservableList = FXCollections.observableList(clinicDBAccess.getPatients());
-        // lPatients es una ListView<Patient>
-        lPatients.setItems(patientsObservableList); //Se conecta la lista con el ListView
-        Patient patient = new Patient("5307867J","Juan","Cafe Grandes","9376543",avatar);
-        patientsObservableList.add(patient); //Se añade un Nuevo paciente
-        clinicDBAccess.saveDB(); //Se almacena el cambio en el fichero XML*/
     }
-
-    @FXML
-    private void delAct(ActionEvent event) {
-        current = tablaPacientes.getSelectionModel().getSelectedItem();
-        if(ClinicDBAccess.getSingletonClinicDBAccess().hasAppointments(current)){
-            Alert alertAmazon = new Alert(Alert.AlertType.INFORMATION);
-            alertAmazon.setTitle("Error");
-            alertAmazon.setHeaderText("No se puede borrar este paciente");
-            alertAmazon.setContentText("Por favor, compruebe que el paciente no tiene ninguna cita concertada");
-            alertAmazon.showAndWait();
-        } else {
-            //borrar paciente (?)
-            pacientes.remove(tablaPacientes.getSelectionModel().getSelectedIndex());
-        }
-    }
-
-    @FXML
-    private void showAct(ActionEvent event) throws IOException {
-        editable = false;
-        current = tablaPacientes.getSelectionModel().getSelectedItem();
-        FXMLLoader miCargador = new FXMLLoader(getClass().getResource("/Vista/FXMLPacientesAdd.fxml"));
-        AnchorPane root = (AnchorPane) miCargador.load();   
-               
-        Scene scene = new Scene(root);
-        Stage stage = new Stage();
-        stage.setScene(scene);
-        stage.setTitle("Mostrar detalles paciente");
-        stage.initModality(Modality.APPLICATION_MODAL);
-        stage.showAndWait();
-        
-    }
-
-    
 
       
 }
