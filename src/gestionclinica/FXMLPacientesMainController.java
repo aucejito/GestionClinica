@@ -142,7 +142,6 @@ public class FXMLPacientesMainController implements Initializable {
             alertAmazon.setContentText("Por favor, compruebe que el paciente no tiene ninguna cita concertada");
             alertAmazon.showAndWait();
         } else {
-            //borrar paciente (?)
             patientsObservableList.remove(current);
             tablaPacientes.setItems(patientsObservableList);
             

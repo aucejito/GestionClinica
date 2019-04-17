@@ -8,9 +8,14 @@ package gestionclinica;
 
 import DBAccess.ClinicDBAccess;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -18,9 +23,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
@@ -47,18 +52,18 @@ public class FXMLPacientesAddController implements Initializable {
     @FXML
     private Button guardarButton;
     @FXML
-    private Label selArchivoLabel;
-    @FXML
     private Button salirButton;
     
     ArrayList<Patient> listaPacientes;
-    
-    Image img = null;
-    
+    Image img;
     static boolean guardadoP = false;
     
     ClinicDBAccess clinicDBAccess = ClinicDBAccess.getSingletonClinicDBAccess();
     ObservableList<Patient> patientsObservableList;
+    @FXML
+    private ImageView imageView;
+    @FXML
+    private Button loadFotoButton;
     
     
     
@@ -68,7 +73,9 @@ public class FXMLPacientesAddController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
+        
         if(FXMLPacientesMainController.editable == false){
+            
             dniTextField.setEditable(false);
             nombreTextField.setEditable(false);
             apellidosTextField.setEditable(false);
@@ -76,16 +83,28 @@ public class FXMLPacientesAddController implements Initializable {
             salirButton.setVisible(true);
             cancelButton.setVisible(false);
             guardarButton.setVisible(false);
+            loadFotoButton.setDisable(true);
             
             dniTextField.setText(FXMLPacientesMainController.current.getIdentifier());
             nombreTextField.setText(FXMLPacientesMainController.current.getName());
             apellidosTextField.setText(FXMLPacientesMainController.current.getSurname());
             telefonoTextField.setText(FXMLPacientesMainController.current.getTelephon());
+            imageView.setImage(FXMLPacientesMainController.current.getPhoto());
             
         }else{
-        salirButton.setVisible(false);
-        cancelButton.setVisible(true);
-        guardarButton.setVisible(true);
+            
+                       
+            Random rand = new Random();
+            int j = rand.nextInt(4);
+            img = new Image("huevo/" + j + ".jpg");
+            imageView.setImage(img);
+
+            salirButton.setVisible(false);
+            cancelButton.setVisible(true);
+            guardarButton.setVisible(true);
+            loadFotoButton.setDisable(false);
+        
+        
         }
         
 
@@ -154,10 +173,14 @@ public class FXMLPacientesAddController implements Initializable {
         fileChooser.getExtensionFilters().addAll(
         new ExtensionFilter("Image Files", "*.png", "*.jpeg","*.jpg", "*.gif"));
         File selectedFile = fileChooser.showOpenDialog(null);
-        /*if (selectedFile != null) {
-        selArchivoLabel.setText(selectedFile.getAbsolutePath());
-        }*/
         img = new Image(selectedFile.toURI().toString());
+        imageView.setImage(img);
+    }
+
+    @FXML
+    private void exitAct(ActionEvent event) {
+       Stage stage = (Stage) cancelButton.getScene().getWindow();
+        stage.close();
     }
 }
 

@@ -26,7 +26,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import model.DateTimeAdapter;
 import model.Days;
+import static model.Days.Monday;
 import model.Doctor;
 import model.ExaminationRoom;
 import model.LocalTimeAdapter;
@@ -104,6 +106,15 @@ public class FXMLMedicosAddController implements Initializable {
             nombreTextField.setText(FXMLMedicosMainController.currentM.getName());
             apellidosTextField.setText(FXMLMedicosMainController.currentM.getSurname());
             telefonoTextField.setText(FXMLMedicosMainController.currentM.getTelephon());
+            try {
+                horaInicio.setText(lTAdapter.marshal(FXMLMedicosMainController.currentM.getVisitStartTime()));
+                horaFin.setText(lTAdapter.marshal(FXMLMedicosMainController.currentM.getVisitEndTime()));
+                
+            } catch (Exception ex) {
+                Logger.getLogger(FXMLMedicosAddController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            //consultaComboBox.setItems(examRoom.getIdentNumber().FXMLMedicosMainController.currentM.getExaminationRoom());
+            
             
             
             try {
@@ -155,18 +166,29 @@ public class FXMLMedicosAddController implements Initializable {
         }else{
             Image img = null;
             int i = Integer.parseInt(consultaComboBox.getValue().substring(9));
-            /*
-            for(int j = 0; i < 4; i++){
+            
+            
+            
             ObservableList<Days> dias;
-            dias = Days.valueOf(FXCollections.observableArrayList(diasComboBox.getCheckModel().getCheckedItems()).indexOf(j));
-            }
-            Doctor nuevoDoctor = new Doctor(consultas.get(i), dias, lTAdapter.unmarshal(horaInicio.getText()),lTAdapter.unmarshal(horaFin.getText()) ,
+            dias = diasComboBox.getCheckModel().getCheckedItems();
+            
+            
+            Doctor nuevoDoctor = new Doctor(consultas.get(i), dias.get(0), lTAdapter.unmarshal(horaInicio.getText()),lTAdapter.unmarshal(horaFin.getText()) ,
             dniTextField.getText(), nombreTextField.getText(), apellidosTextField.getText(), telefonoTextField.getText(), img);
-            */
+            
+            if(dias.size() > 1){
+                for(int k = 0; k < dias.size(); k++){
+                    dias.remove(0);
+                    nuevoDoctor.addVisitDay(dias.get(0));
+                }
+            }
+                    
+                    
+
             Stage stage = (Stage) cancelButton.getScene().getWindow();
             stage.close();
             doctorsObservableList = FXCollections.observableList(clinicDBAccess.getDoctors());
-           // doctorsObservableList.add(nuevoDoctor);
+            doctorsObservableList.add(nuevoDoctor);
             guardadoD = true;
         }
     }
