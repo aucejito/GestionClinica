@@ -10,9 +10,13 @@ import java.io.File;
 import java.net.URL;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -21,9 +25,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import model.DateTimeAdapter;
@@ -55,10 +61,7 @@ public class FXMLMedicosAddController implements Initializable {
     private Button guardarButton;
     @FXML
     private Button cancelButton;
-    @FXML
-    private CustomTextField horaInicio;
-    @FXML
-    private CustomTextField horaFin;
+    
 
     private static final Image imgHora = new Image("hora.png");
     @FXML
@@ -77,14 +80,49 @@ public class FXMLMedicosAddController implements Initializable {
     ArrayList<Integer> idConsultas;
     
     static boolean guardadoD;
+    @FXML
+    private ComboBox<Integer> hInicio;
+    @FXML
+    private ComboBox<Integer> mInicio;
+    @FXML
+    private ComboBox<Integer> hFin;
+    @FXML
+    private ComboBox<Integer> mFin;
+    
+    ObservableList<Integer> horas;
+    @FXML
+    private Label hInicioLabel;
+    @FXML
+    private Label hFinLabel;
+    @FXML
+    private HBox hboxHoraFin;
+    @FXML
+    private HBox hboxHoraInicio;
+    @FXML
+    private Label diasLabel;
+    @FXML
+    private Label consulLabel;
+    @FXML
+    private ImageView imageviewDoctor;
+    
+    Image img;
+    @FXML
+    private Button fotoButton;
     
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        horaInicio.setLeft(new ImageView(imgHora));
-        horaFin.setLeft(new ImageView(imgHora));
+        for (int i = 0; i < 13; i++) {
+            hInicio.getItems().addAll(i+8); 
+            hFin.getItems().addAll(i+8); 
+        }
+        for (int i = 0; i < 4; i++) {
+            mInicio.getItems().addAll(i*15); 
+            mFin.getItems().addAll(i*15); 
+        }
+                
         
         diasComboBox.getItems().addAll(Days.Monday, Days.Tuesday, Days.Wednesday, Days.Thursday, Days.Friday);
         consultas =  clinicDBAccess.getExaminationRooms();
@@ -93,7 +131,7 @@ public class FXMLMedicosAddController implements Initializable {
             consultaComboBox.getItems().addAll("Consulta " + consultas.get(i).getIdentNumber());
         }
         
-        if(FXMLMedicosMainController.editableM == false){
+        if(!FXMLMedicosMainController.editableM){
             dniTextField.setEditable(false);
             nombreTextField.setEditable(false);
             apellidosTextField.setEditable(false);
@@ -101,38 +139,46 @@ public class FXMLMedicosAddController implements Initializable {
             salirButton.setVisible(true);
             cancelButton.setVisible(false);
             guardarButton.setVisible(false);
+            hboxHoraInicio.setVisible(false);
+            hboxHoraFin.setVisible(false);
+            consultaComboBox.setVisible(false);
+            diasComboBox.setVisible(false);
+            
             
             dniTextField.setText(FXMLMedicosMainController.currentM.getIdentifier());
             nombreTextField.setText(FXMLMedicosMainController.currentM.getName());
             apellidosTextField.setText(FXMLMedicosMainController.currentM.getSurname());
             telefonoTextField.setText(FXMLMedicosMainController.currentM.getTelephon());
+            diasLabel.setText(FXMLMedicosMainController.currentM.getVisitDays().toString());
+            consulLabel.setText("Consulta " + examRoom.getIdentNumber() );
             try {
-                horaInicio.setText(lTAdapter.marshal(FXMLMedicosMainController.currentM.getVisitStartTime()));
-                horaFin.setText(lTAdapter.marshal(FXMLMedicosMainController.currentM.getVisitEndTime()));
-                
+                hInicioLabel.setText(lTAdapter.marshal(FXMLMedicosMainController.currentM.getVisitStartTime()));
+                hFinLabel.setText(lTAdapter.marshal(FXMLMedicosMainController.currentM.getVisitEndTime()));
             } catch (Exception ex) {
                 Logger.getLogger(FXMLMedicosAddController.class.getName()).log(Level.SEVERE, null, ex);
             }
-            //consultaComboBox.setItems(examRoom.getIdentNumber().FXMLMedicosMainController.currentM.getExaminationRoom());
             
+            }else{
+                Random rand = new Random();
+                int j = rand.nextInt(4);
+                img = new Image("huevo/" + j + ".jpg");
+                imageviewDoctor.setImage(img);
+                telefonoTextField.textProperty().addListener(new ChangeListener<String>() {
+                
+                public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                    if (!newValue.matches("\\d*")) {
+                      telefonoTextField.setText(newValue.replaceAll("[^\\d]", ""));
+                    }
+                }   
+                public void changed2(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                    }
+                });   
             
-            
-            try {
-            horaInicio.setText(lTAdapter.marshal(FXMLMedicosMainController.currentM.getVisitStartTime()));
-            } catch (Exception ex) {
-            Logger.getLogger(FXMLMedicosAddController.class.getName()).log(Level.SEVERE, null, ex);
+                salirButton.setVisible(false);
+                cancelButton.setVisible(true);
+                guardarButton.setVisible(true);
             }
-            try {
-            horaFin.setText(lTAdapter.marshal(FXMLMedicosMainController.currentM.getVisitEndTime()));
-            } catch (Exception ex) {
-            Logger.getLogger(FXMLMedicosAddController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-                        
-        }else{
-        salirButton.setVisible(false);
-        cancelButton.setVisible(true);
-        guardarButton.setVisible(true);
-        }
         
         // TODO
     }    
@@ -172,18 +218,17 @@ public class FXMLMedicosAddController implements Initializable {
             ObservableList<Days> dias;
             dias = diasComboBox.getCheckModel().getCheckedItems();
             
-            
-            Doctor nuevoDoctor = new Doctor(consultas.get(i), dias.get(0), lTAdapter.unmarshal(horaInicio.getText()),lTAdapter.unmarshal(horaFin.getText()) ,
+            String hIni = hInicio.getSelectionModel() + ":" + mInicio.getSelectionModel();
+            String hFin1 = hFin.getSelectionModel() + ":" + mFin.getSelectionModel();
+            Doctor nuevoDoctor = new Doctor(consultas.get(i), dias.get(0), lTAdapter.unmarshal(hIni),lTAdapter.unmarshal(hFin1) ,
             dniTextField.getText(), nombreTextField.getText(), apellidosTextField.getText(), telefonoTextField.getText(), img);
             
             if(dias.size() > 1){
-                for(int k = 0; k < dias.size(); k++){
-                    dias.remove(0);
-                    nuevoDoctor.addVisitDay(dias.get(0));
+                for(int k = 1; k < dias.size(); k++){
+                     nuevoDoctor.addVisitDay(dias.get(k));
                 }
             }
-                    
-                    
+                     
 
             Stage stage = (Stage) cancelButton.getScene().getWindow();
             stage.close();
@@ -206,6 +251,7 @@ public class FXMLMedicosAddController implements Initializable {
         fileChooser.getExtensionFilters().addAll(
         new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpeg","*.jpg", "*.gif"));
         File selectedFile = fileChooser.showOpenDialog(null);
+        fotoButton.setText("Cambiar");
     }
 
     @FXML

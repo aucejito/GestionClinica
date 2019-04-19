@@ -25,6 +25,7 @@ import javafx.stage.Stage;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.effect.Glow;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 
 /**
@@ -53,6 +54,8 @@ public class FXMLGestionClinicaController implements Initializable {
     private GridPane gridPane;
     
     ClinicDBAccess clinicDBAccess = ClinicDBAccess.getSingletonClinicDBAccess();
+    @FXML
+    private ImageView imageView;
        
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -60,6 +63,10 @@ public class FXMLGestionClinicaController implements Initializable {
         gridPane.prefHeightProperty().bind(anchorPane.heightProperty());
         gridPane.prefWidthProperty().bind(anchorPane.widthProperty());
         bloom.setLevel(0.5);
+        
+        gridPane.prefHeightProperty().bind(anchorPane.heightProperty());
+        gridPane.prefWidthProperty().bind(anchorPane.widthProperty());
+        //imageView.pref.bind(anchorPane.widthProperty());
         
     }    
 

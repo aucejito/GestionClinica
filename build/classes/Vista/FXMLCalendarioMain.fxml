@@ -9,15 +9,14 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<?import org.controlsfx.control.textfield.CustomTextField?>
 
-<AnchorPane id="AnchorPane" fx:id="scene" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gestionclinica.FXMLMedicosMainController">
+<AnchorPane id="AnchorPane" fx:id="scene" prefHeight="344.0" prefWidth="538.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gestionclinica.FXMLCalendarioMainController">
    <children>
       <BorderPane fx:id="borderPane" prefHeight="400.0" prefWidth="600.0">
          <right>
             <VBox prefHeight="454.0" prefWidth="118.0" BorderPane.alignment="CENTER">
                <children>
-                  <Button accessibleHelp="Añadir paciente" accessibleText="Añadir paciente" mnemonicParsing="false" onAction="#addAct" prefHeight="47.0" prefWidth="118.0" style="-fx-background-color: rgb(239, 242, 242);" text="añadir">
+                  <Button accessibleHelp="Añadir paciente" accessibleText="Añadir paciente" mnemonicParsing="false" prefHeight="47.0" prefWidth="118.0" style="-fx-background-color: rgb(239, 242, 242);" text="añadir">
                      <VBox.margin>
                         <Insets />
                      </VBox.margin>
@@ -27,11 +26,19 @@
                         <Insets top="20.0" />
                      </VBox.margin>
                   </Button>
-                  <Button accessibleHelp="Añadir paciente" accessibleText="Añadir paciente" layoutX="10.0" layoutY="57.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="118.0" style="-fx-background-color: rgb(239, 242, 242);" text="modificar">
+                  <Button accessibleHelp="Añadir paciente" accessibleText="Añadir paciente" layoutX="10.0" layoutY="57.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="118.0" style="-fx-background-color: rgb(239, 242, 242);" text="Mostrar detalles">
                      <VBox.margin>
                         <Insets top="20.0" />
                      </VBox.margin>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
                   </Button>
+                  <ComboBox fx:id="medComboBox" prefWidth="150.0">
+                     <VBox.margin>
+                        <Insets top="20.0" />
+                     </VBox.margin>
+                  </ComboBox>
                </children>
                <padding>
                   <Insets top="30.0" />
@@ -41,42 +48,46 @@
                </BorderPane.margin>
             </VBox>
          </right>
-         <top>
-            <HBox prefHeight="25.0" prefWidth="747.0" BorderPane.alignment="CENTER">
-               <BorderPane.margin>
-                  <Insets bottom="5.0" left="5.0" top="10.0" />
-               </BorderPane.margin>
-               <children>
-                  <ComboBox fx:id="tipoBusqueda" prefHeight="25.0" prefWidth="109.0" promptText="Filtrar...">
-                     <HBox.margin>
-                        <Insets right="5.0" />
-                     </HBox.margin>
-                  </ComboBox>
-                  <CustomTextField fx:id="barraBusqueda" prefHeight="25.0" prefWidth="265.0" promptText="Introduce aquí el">
-                     <HBox.margin>
-                        <Insets right="5.0" />
-                     </HBox.margin>
-                  </CustomTextField>
-                  <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="84.0" text="Buscar" />
-               </children>
-            </HBox>
-         </top>
          <center>
-            <TableView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <TableView prefHeight="180.0" prefWidth="467.0" BorderPane.alignment="CENTER">
               <columns>
-                <TableColumn prefWidth="67.0" text="Lunes" />
-                <TableColumn prefWidth="67.0" text="Martes" />
-                  <TableColumn prefWidth="67.0" text="Miércoles" />
-                  <TableColumn prefWidth="67.0" text="Jueves" />
-                  <TableColumn prefWidth="67.0" text="Viernes" />
-                  <TableColumn prefWidth="67.0" text="Sábado" />
-                  <TableColumn prefWidth="67.0" text="Domingo" />
+                <TableColumn maxWidth="6000.0" prefWidth="93.0" text="Lunes" />
+                <TableColumn maxWidth="6000.0" prefWidth="93.0" text="Martes" />
+                  <TableColumn maxWidth="6000.0" prefWidth="93.0" text="Miércoles" />
+                  <TableColumn maxWidth="6000.0" prefWidth="93.0" text="Jueves" />
+                  <TableColumn maxWidth="6000.0" prefWidth="93.0" text="Viernes" />
               </columns>
                <BorderPane.margin>
                   <Insets bottom="5.0" left="5.0" top="5.0" />
                </BorderPane.margin>
             </TableView>
          </center>
+         <top>
+            <HBox maxWidth="-Infinity" prefHeight="25.0" prefWidth="467.0" BorderPane.alignment="TOP_LEFT">
+               <children>
+                  <Button fx:id="prevWeekButton" mnemonicParsing="false" prefHeight="52.0" prefWidth="41.0" text="&lt;&lt;&lt;">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </Button>
+                  <HBox alignment="TOP_RIGHT" maxWidth="-Infinity" prefHeight="25.0" prefWidth="426.0">
+                     <children>
+                        <Button fx:id="nextWeekButton" alignment="CENTER_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" prefHeight="52.0" prefWidth="41.0" text="&gt;&gt;&gt;">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </Button>
+                     </children>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </HBox>
+               </children>
+               <BorderPane.margin>
+                  <Insets left="5.0" top="5.0" />
+               </BorderPane.margin>
+            </HBox>
+         </top>
       </BorderPane>
    </children>
 </AnchorPane>

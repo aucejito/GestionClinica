@@ -13,7 +13,7 @@
 
 <AnchorPane id="AnchorPane" fx:id="anchorPane" prefHeight="575.0" prefWidth="489.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gestionclinica.FXMLGestionClinicaController">
    <children>
-      <ImageView fitHeight="577.0" fitWidth="489.0" opacity="0.34" pickOnBounds="true">
+      <ImageView fx:id="imageView" fitHeight="577.0" fitWidth="489.0" opacity="0.34" pickOnBounds="true">
          <image>
             <Image url="@../attractive-backdrop-background-988872.jpg" />
          </image>
@@ -49,14 +49,14 @@
                   <Insets top="20.0" />
                </GridPane.margin>
             </Button>
-            <Button fx:id="opcionesButton" mnemonicParsing="false" onMouseEntered="#onMEnteredOpciones" onMouseExited="#onMExitedOpciones" prefHeight="53.0" prefWidth="127.0" style="-fx-background-color: rgb(127, 182, 216);" text="Opciones" textFill="WHITE" GridPane.columnSpan="2" GridPane.halignment="RIGHT" GridPane.rowIndex="5">
+            <Button fx:id="opcionesButton" mnemonicParsing="false" onMouseEntered="#onMEnteredOpciones" onMouseExited="#onMExitedOpciones" prefHeight="53.0" prefWidth="127.0" style="-fx-background-color: rgb(127, 182, 216);" text="Opciones" textFill="WHITE" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="5">
                <GridPane.margin>
-                  <Insets right="120.0" />
+                  <Insets left="80.0" right="120.0" />
                </GridPane.margin>
             </Button>
-            <Button fx:id="nosotrosButton" contentDisplay="TOP" mnemonicParsing="false" onMouseEntered="#onMEnteredNosotros" onMouseExited="#onMExitedNosotros" prefHeight="53.0" prefWidth="127.0" style="-fx-background-color: rgb(127, 182, 216);" text="Sobre nosotros..." textFill="WHITE" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="LEFT" GridPane.rowIndex="5">
+            <Button fx:id="nosotrosButton" contentDisplay="TOP" mnemonicParsing="false" onMouseEntered="#onMEnteredNosotros" onMouseExited="#onMExitedNosotros" prefHeight="53.0" prefWidth="127.0" style="-fx-background-color: rgb(127, 182, 216);" text="Sobre nosotros..." textFill="WHITE" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="5">
                <GridPane.margin>
-                  <Insets left="120.0" />
+                  <Insets left="120.0" right="80.0" />
                </GridPane.margin>
             </Button>
             <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="37.0" prefWidth="249.0" text="Clínica Mis Muertos SL" textAlignment="CENTER" GridPane.columnSpan="3" GridPane.halignment="CENTER">
