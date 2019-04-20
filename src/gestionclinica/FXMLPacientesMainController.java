@@ -72,8 +72,8 @@ public class FXMLPacientesMainController implements Initializable {
     @FXML
     private TableColumn<Patient, String> columnaDNI;
     
-   ArrayList<Patient> pacientes;
-   static Patient current;
+    ArrayList<Patient> pacientes;
+    static Patient current;
     @FXML
     private Button delButton;
     @FXML
@@ -81,6 +81,9 @@ public class FXMLPacientesMainController implements Initializable {
     
     ClinicDBAccess clinicDBAccess = ClinicDBAccess.getSingletonClinicDBAccess();
     ObservableList<Patient> patientsObservableList;
+    @FXML
+    private Button buscarButton;
+    ArrayList<Patient> introducirPacientes = new ArrayList<Patient>();
     
     
     /**
@@ -89,6 +92,7 @@ public class FXMLPacientesMainController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+       pacientes = clinicDBAccess.getPatients();
        patientsObservableList = FXCollections.observableList(clinicDBAccess.getPatients());
        String [] options = {"DNI", "Nombre", "Apellido"};
        
@@ -104,7 +108,7 @@ public class FXMLPacientesMainController implements Initializable {
         borderPane.prefHeightProperty().bind(scene.heightProperty());
         borderPane.prefWidthProperty().bind(scene.widthProperty());
         
-        inicializarTabla();
+        inicializarTabla(pacientes);
         
         delButton.disableProperty().bind(tablaPacientes.getSelectionModel().selectedIndexProperty().isEqualTo(-1));
         showButton.disableProperty().bind(tablaPacientes.getSelectionModel().selectedIndexProperty().isEqualTo(-1));
@@ -164,10 +168,9 @@ public class FXMLPacientesMainController implements Initializable {
         
     }
 
-    private void inicializarTabla(){
-        ClinicDBAccess datosClinica = ClinicDBAccess.getSingletonClinicDBAccess();
-        pacientes = datosClinica.getPatients();
-        tablaPacientes.setItems(FXCollections.observableList(pacientes));
+    private void inicializarTabla(ArrayList<Patient> pacientes1){
+        
+        tablaPacientes.setItems(FXCollections.observableList(pacientes1));
         columnaFoto.setCellValueFactory(celda1 -> new SimpleObjectProperty<Image>(celda1.getValue().getPhoto()));
         columnaFoto.setCellFactory(columna -> {return new TableCell<Patient, Image>(){
             private ImageView view = new ImageView();
@@ -229,6 +232,59 @@ public class FXMLPacientesMainController implements Initializable {
             
             };
         });
+    }
+
+    @FXML
+    private void buscarAct(ActionEvent event) {
+        String bus = barraBusqueda.getText().toLowerCase();
+
+
+        for (int i = introducirPacientes.size(); i > 0; i--) {
+            introducirPacientes.remove(0);
+        }
+        inicializarTabla(introducirPacientes);
+        switch(tipoBusqueda.getSelectionModel().getSelectedIndex()){
+
+            case 0:
+                for (int i = 0; i < pacientes.size(); i++) {
+                    String patient = pacientes.get(i).getIdentifier().toLowerCase();
+                    System.out.println(patient);
+                    System.out.println(bus);
+                    if(patient.equals(bus) ||  patient.startsWith(bus)){
+                        introducirPacientes.add(pacientes.get(i));
+                    }
+                }
+                inicializarTabla(introducirPacientes);
+
+                break;
+
+            case 1:
+                for (int i = 0; i < pacientes.size(); i++) {
+                    String patient = pacientes.get(i).getName().toLowerCase();
+                    if(patient.equals(bus) ||  patient.startsWith(bus)){
+                        introducirPacientes.add(pacientes.get(i));
+                    }
+                }
+                inicializarTabla(introducirPacientes);
+                break;
+
+            case 2:
+                for (int i = 0; i < pacientes.size(); i++) {
+                    String patient = pacientes.get(i).getSurname().toLowerCase();
+                    if(patient.equals(bus) || patient.startsWith(bus)){
+                        introducirPacientes.add(pacientes.get(i));
+                    }
+                }
+                inicializarTabla(introducirPacientes);
+                break;
+
+        }
+    
+    }
+
+    @FXML
+    private void cancelarBusc(ActionEvent event) {
+        inicializarTabla(pacientes);
     }
 
       

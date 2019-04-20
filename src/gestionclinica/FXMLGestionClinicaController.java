@@ -6,6 +6,7 @@
 package gestionclinica;
 
 import DBAccess.ClinicDBAccess;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -27,6 +28,8 @@ import javafx.scene.effect.Glow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 
 /**
  *
@@ -170,3 +173,13 @@ public class FXMLGestionClinicaController implements Initializable {
     }
     
 }
+
+
+/*mediaview.setFitHeight(360);
+mediaview.setFitWidth(640);
+final File file = new File("vid.mp4");
+String source = file.toURI().toString();
+Media media = new Media(source);
+MediaPlayer mediaplayer = new MediaPlayer(media);
+mediaplayer.setAutoPlay(true);
+mediaview.setMediaPlayer(mediaplayer);*/

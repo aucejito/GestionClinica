@@ -73,10 +73,22 @@
                         <Insets left="5.0" />
                      </HBox.margin>
                   </CustomTextField>
-                  <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="84.0" text="Buscar">
+                  <Button fx:id="buscarButton" mnemonicParsing="false" onAction="#buscarAct" prefHeight="25.0" prefWidth="84.0" text="Buscar">
                      <HBox.margin>
                         <Insets left="5.0" />
                      </HBox.margin>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#cancelarBusc" prefHeight="21.0" prefWidth="31.0">
+                     <HBox.margin>
+                        <Insets left="5.0" />
+                     </HBox.margin>
+                     <graphic>
+                        <ImageView fitHeight="14.0" fitWidth="14.0" pickOnBounds="true">
+                           <image>
+                              <Image url="@../cruzroja.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
                   </Button>
                </children>
                <BorderPane.margin>

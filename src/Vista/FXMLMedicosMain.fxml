@@ -5,6 +5,8 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
@@ -57,7 +59,19 @@
                         <Insets right="5.0" />
                      </HBox.margin>
                   </CustomTextField>
-                  <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="84.0" text="Buscar" />
+                  <Button mnemonicParsing="false" onAction="#buscarAct" prefHeight="25.0" prefWidth="84.0" text="Buscar" />
+                  <Button mnemonicParsing="false" onAction="#cancelarBusc">
+                     <HBox.margin>
+                        <Insets left="5.0" />
+                     </HBox.margin>
+                     <graphic>
+                        <ImageView fitHeight="14.0" fitWidth="14.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../cruzroja.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
                </children>
             </HBox>
          </top>

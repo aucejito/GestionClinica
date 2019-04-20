@@ -75,6 +75,7 @@ public class FXMLMedicosMainController implements Initializable {
     private Button showButton;
     ClinicDBAccess clinicDBAccess = ClinicDBAccess.getSingletonClinicDBAccess();
     ObservableList<Doctor> doctorsObservableList;
+    ArrayList<Doctor> introducirDoctores = new ArrayList<Doctor>();
     
     
     /**
@@ -83,8 +84,9 @@ public class FXMLMedicosMainController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        doctores = clinicDBAccess.getDoctors();
         doctorsObservableList = FXCollections.observableList(clinicDBAccess.getDoctors());
-        String [] options = {"DNI", "Nombre", "Apellido", "Teléfono"};
+        String [] options = {"DNI", "Nombre", "Apellido"};
         
         tipoBusqueda.setItems(FXCollections.observableArrayList(options));           
                         
@@ -98,7 +100,7 @@ public class FXMLMedicosMainController implements Initializable {
         borderPane.prefHeightProperty().bind(scene.heightProperty());
         borderPane.prefWidthProperty().bind(scene.widthProperty());
         
-        inicializarTabla();
+        inicializarTabla(doctores);
         
         delButton.disableProperty().bind(tablaDoctores.getSelectionModel().selectedIndexProperty().isEqualTo(-1));
         showButton.disableProperty().bind(tablaDoctores.getSelectionModel().selectedIndexProperty().isEqualTo(-1));
@@ -157,11 +159,10 @@ public class FXMLMedicosMainController implements Initializable {
     }
     
     
-    private void inicializarTabla(){
-    ClinicDBAccess datosClinica = ClinicDBAccess.getSingletonClinicDBAccess();
+    private void inicializarTabla(ArrayList<Doctor> doctores1){
+        
         currentM = tablaDoctores.getSelectionModel().getSelectedItem();
-        doctores = datosClinica.getDoctors();
-        tablaDoctores.setItems(FXCollections.observableList(doctores));
+        tablaDoctores.setItems(FXCollections.observableList(doctores1));
         columnaFoto.setCellValueFactory(celda1 -> new SimpleObjectProperty<>(celda1.getValue().getPhoto()));
         columnaFoto.setCellFactory(columna -> {return new TableCell<Doctor, Image>(){
             private ImageView view = new ImageView();
@@ -223,40 +224,59 @@ public class FXMLMedicosMainController implements Initializable {
             
             };
         });
-}
+    }
+
+    @FXML
+    private void buscarAct(ActionEvent event) {
+        String bus = barraBusqueda.getText().toLowerCase();
+
+
+        for (int i = introducirDoctores.size(); i > 0; i--) {
+            introducirDoctores.remove(0);
+        }
+        inicializarTabla(introducirDoctores);
+        switch(tipoBusqueda.getSelectionModel().getSelectedIndex()){
+
+            case 0:
+                for (int i = 0; i < doctores.size(); i++) {
+                    String patient = doctores.get(i).getIdentifier().toLowerCase();
+                    System.out.println(patient);
+                    System.out.println(bus);
+                    if(patient.equals(bus) ||  patient.startsWith(bus)){
+                        introducirDoctores.add(doctores.get(i));
+                    }
+                }
+                inicializarTabla(introducirDoctores);
+
+                break;
+
+            case 1:
+                for (int i = 0; i < doctores.size(); i++) {
+                    String patient = doctores.get(i).getName().toLowerCase();
+                    if(patient.equals(bus) ||  patient.startsWith(bus)){
+                        introducirDoctores.add(doctores.get(i));
+                    }
+                }
+                inicializarTabla(introducirDoctores);
+                break;
+
+            case 2:
+                for (int i = 0; i < doctores.size(); i++) {
+                    String patient = doctores.get(i).getSurname().toLowerCase();
+                    if(patient.equals(bus) || patient.startsWith(bus)){
+                        introducirDoctores.add(doctores.get(i));
+                    }
+                }
+                inicializarTabla(introducirDoctores);
+                break;
+
+        }
+    }
+
+    @FXML
+    private void cancelarBusc(ActionEvent event) {
+        inicializarTabla(doctores);
+    }
     
     
-    /* private void filtrar(String nombre){
-    System.out.print("Lista> ");
-    ArrayList<Patient> personas = ClinicDBAccess.getSingletonClinicDBAccess().getPatients();
-    List<Patient> solucion = new ArrayList<Patient>();
-    String[] noms = nombre.trim().split(" ");
-    if(noms.length > 0){//>=
-    for(int i = 0; i < personas.size(); i ++){
-    for(int j = 0; j < noms.length; j ++){
-    if(filtrarPaciente(noms[j].trim().toLowerCase(), personas.get(i).getName().trim().toLowerCase(), personas.get(i).getSurname().trim().toLowerCase())){
-    solucion.add(personas.get(i));
-    lista_pacientes_o = FXCollections.observableArrayList(solucion);
-    lista_pacientes.setItems(lista_pacientes_o);
-    }
-    }
-    }
-    }else {
-    System.err.println("Error 2");
-    }
-    }
-    private  boolean filtrarPaciente(String field, String nombre, String apellido){
-    //encuentro apellidos
-    String[] terminos = field.trim().split(" ");
-    String[] apellidos = apellido.trim().split(" ");
-    try {
-    for(int i = 0; i < terminos.length; i ++){//field
-    for(int j = 0; j < apellidos.length; j ++){
-    if(terminos[i].equals(apellidos[j]) || terminos[i].equals(nombre)) return true;
-    }
-    }
-    }catch(Exception e){System.err.println("FUCKKK!!");}
-    
-    return false;
-    }*/
 }
