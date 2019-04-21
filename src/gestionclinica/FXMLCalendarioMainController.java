@@ -55,10 +55,6 @@ public class FXMLCalendarioMainController implements Initializable {
     
     ClinicDBAccess clinicDBAccess = ClinicDBAccess.getSingletonClinicDBAccess();
     ObservableList<Doctor> doctorsObservableList = FXCollections.observableList(clinicDBAccess.getDoctors());
-    @FXML
-    private Button prevWeekButton;
-    @FXML
-    private Button nextWeekButton;
     
     Doctor currentDoctor;
    
@@ -77,6 +73,13 @@ public class FXMLCalendarioMainController implements Initializable {
     @FXML
     private DatePicker datePicker;
     ArrayList<Appointment> currentAppointments;
+    @FXML
+    private Button actualizarTablaButton;
+    @FXML
+    private Button delButton;
+    @FXML
+    private Button showButton;
+    static Appointment selectedAppointment;
 
     /**
      * Initializes the controller class.
@@ -86,7 +89,7 @@ public class FXMLCalendarioMainController implements Initializable {
         
         LocalDate fechaFormat;
         currentAppointments = new ArrayList<Appointment>();
-        LocalDate l = LocalDate.of(2019, 03, 30);
+        LocalDate l = LocalDate.now();
         datePicker.setValue(l);
         
         listaCitas = clinicDBAccess.getAppointments();
@@ -98,7 +101,18 @@ public class FXMLCalendarioMainController implements Initializable {
             }
                 
         }
-        tablaCitas.setItems(FXCollections.observableList(currentAppointments));
+        try {
+            inicializarTabla(currentAppointments);
+        } catch (Exception ex) {
+            Logger.getLogger(FXMLCalendarioMainController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        delButton.disableProperty().bind(tablaCitas.getSelectionModel().selectedIndexProperty().isEqualTo(-1));
+        showButton.disableProperty().bind(tablaCitas.getSelectionModel().selectedIndexProperty().isEqualTo(-1));
+    }
+
+    private void inicializarTabla(ArrayList<Appointment> listacitas) throws Exception {
+       tablaCitas.setItems(FXCollections.observableList(listacitas));
         medColumn.setCellValueFactory(celda2 -> new SimpleObjectProperty<String>(celda2.getValue().getDoctor().getName()));
         medColumn.setCellFactory(columna -> {return new TableCell<Appointment, String>(){
             private Text view = new Text();
@@ -161,12 +175,8 @@ public class FXMLCalendarioMainController implements Initializable {
         });
     }
 
-    private void inicializarTabla() throws Exception {
-       
-    }
-
     @FXML
-    private void addCitas(ActionEvent event) throws IOException {
+    private void addCitas(ActionEvent event) throws IOException, Exception {
         FXMLLoader miCargador = new FXMLLoader(getClass().getResource("/Vista/FXMLCalendarioAdd.fxml"));
         AnchorPane root = (AnchorPane) miCargador.load();
 
@@ -176,6 +186,66 @@ public class FXMLCalendarioMainController implements Initializable {
         Stage stage = new Stage();
         stage.setScene(scene);
         stage.setTitle("Añadir cita");
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.showAndWait();
+        if(FXMLCalendarioAddController.guardadoApp == true){
+            tablaCitas.setItems(FXCollections.observableList(listaCitas));
+        }
+        refrescarTabla();
+        
+    }
+
+    @FXML
+    private void refreshTableAct(ActionEvent event) throws Exception {
+        LocalDate fechaFormat;
+        currentAppointments = new ArrayList<Appointment>();
+        LocalDate l = datePicker.getValue();
+                
+        listaCitas = clinicDBAccess.getAppointments();
+        for (int i = 0; i < listaCitas.size(); i++) {
+                fechaFormat = (listaCitas.get(i).getAppointmentDateTime()).toLocalDate();
+                
+            if(l.equals(fechaFormat)){
+                currentAppointments.add(listaCitas.get(i));
+            }
+        }
+        inicializarTabla(currentAppointments);
+    }
+
+    private void refrescarTabla() throws Exception{
+        LocalDate fechaFormat;
+        currentAppointments = new ArrayList<Appointment>();
+        LocalDate l = datePicker.getValue();
+                
+        listaCitas = clinicDBAccess.getAppointments();
+        for (int i = 0; i < listaCitas.size(); i++) {
+                fechaFormat = (listaCitas.get(i).getAppointmentDateTime()).toLocalDate();
+                
+            if(l.equals(fechaFormat)){
+                currentAppointments.add(listaCitas.get(i));
+            }
+        }
+        inicializarTabla(currentAppointments);
+
+    }
+    
+    @FXML
+    private void delAct(ActionEvent event) throws Exception {
+        listaCitas.remove(tablaCitas.getSelectionModel().getSelectedIndex());
+        refrescarTabla();
+        
+    }
+
+    @FXML
+    private void showAct(ActionEvent event) throws IOException {
+        selectedAppointment = tablaCitas.getSelectionModel().getSelectedItem();
+        FXMLLoader miCargador = new FXMLLoader(getClass().getResource("/Vista/FXMLCalendarioDetalles.fxml"));
+        AnchorPane root = (AnchorPane) miCargador.load();   
+               
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.setTitle("Mostrar detalles cita");
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.showAndWait();
     }

@@ -140,6 +140,7 @@ public class FXMLMedicosMainController implements Initializable {
         } else {
             //borrar doctor (?)
             doctores.remove(tablaDoctores.getSelectionModel().getSelectedIndex());
+            tablaDoctores.setItems(doctorsObservableList);
         }
     }
 

@@ -184,6 +184,7 @@ public class FXMLMedicosAddController implements Initializable {
     }    
 
     @FXML
+    @SuppressWarnings("empty-statement")
     private void guardarAct(ActionEvent event) throws Exception {
         if (dniTextField.getText().isEmpty()){
             Alert alertAmazon = new Alert(Alert.AlertType.INFORMATION);
@@ -218,9 +219,24 @@ public class FXMLMedicosAddController implements Initializable {
             ObservableList<Days> dias;
             dias = diasComboBox.getCheckModel().getCheckedItems();
             
-            String hIni = hInicio.getSelectionModel() + ":" + mInicio.getSelectionModel();
-            String hFin1 = hFin.getSelectionModel() + ":" + mFin.getSelectionModel();
-            Doctor nuevoDoctor = new Doctor(consultas.get(i), dias.get(0), lTAdapter.unmarshal(hIni),lTAdapter.unmarshal(hFin1) ,
+            String hIni = hInicio.getSelectionModel().getSelectedItem().toString() + ":" + mInicio.getSelectionModel().getSelectedItem().toString();
+            if(hInicio.getSelectionModel().getSelectedItem().toString().length() < 2){hIni = "0" + hIni;}
+            if(mInicio.getSelectionModel().getSelectedItem().toString().length() < 2){hIni += "0";}
+            
+            System.out.println(hIni);
+            LocalTime startTime = LocalTime.parse(hIni);
+            
+            
+            
+            String hFin1 = hFin.getSelectionModel().getSelectedItem() + ":" + mFin.getSelectionModel().getSelectedItem();
+            if(hFin.getSelectionModel().getSelectedItem().toString().length() < 2){hFin1 = "0" + hFin1;}
+            if(mFin.getSelectionModel().getSelectedItem().toString().length() < 2){hFin1 += "0";}
+            
+            System.out.println(hFin1);
+            LocalTime endTime = LocalTime.parse(hFin1);
+            
+            
+            Doctor nuevoDoctor = new Doctor(consultas.get(i), dias.get(0), startTime, endTime,
             dniTextField.getText(), nombreTextField.getText(), apellidosTextField.getText(), telefonoTextField.getText(), img);
             
             if(dias.size() > 1){

@@ -19,9 +19,9 @@
          <right>
             <VBox prefHeight="454.0" prefWidth="118.0" BorderPane.alignment="CENTER">
                <children>
-                  <Button accessibleHelp="Añadir paciente" accessibleText="Añadir paciente" mnemonicParsing="false" onAction="#addAct" prefHeight="47.0" prefWidth="118.0" style="-fx-background-color: rgb(127, 182, 216);">
+                  <Button accessibleHelp="Añadir paciente" accessibleText="Añadir paciente" mnemonicParsing="false" onAction="#addAct" prefHeight="44.0" prefWidth="118.0" style="-fx-background-color: #BADCEF;">
                      <graphic>
-                        <ImageView fitHeight="43.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="49.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../40358.png" />
                            </image>
@@ -31,9 +31,9 @@
                         <Insets />
                      </VBox.margin>
                   </Button>
-                  <Button fx:id="delButton" accessibleText="Borrar paciente" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#delAct" prefHeight="47.0" prefWidth="118.0" style="-fx-background-color: rgb(127, 182, 216);">
+                  <Button fx:id="delButton" accessibleText="Borrar paciente" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#delAct" prefHeight="47.0" prefWidth="118.0" style="-fx-background-color: #BADCEF;">
                      <graphic>
-                        <ImageView fitHeight="43.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="49.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../delete%20user.png" />
                            </image>
@@ -43,9 +43,9 @@
                         <Insets top="20.0" />
                      </VBox.margin>
                   </Button>
-                  <Button fx:id="showButton" accessibleText="Mostrar detalles" layoutX="10.0" layoutY="79.0" mnemonicParsing="false" onAction="#showAct" prefHeight="47.0" prefWidth="118.0" style="-fx-background-color: rgb(127, 182, 216);">
+                  <Button fx:id="showButton" accessibleText="Mostrar detalles" layoutX="10.0" layoutY="79.0" mnemonicParsing="false" onAction="#showAct" prefHeight="47.0" prefWidth="118.0" style="-fx-background-color: #BADCEF;">
                      <graphic>
-                        <ImageView fitHeight="43.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="49.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../info%20user.png" />
                            </image>

@@ -15,6 +15,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.effect.Bloom;
@@ -63,6 +64,7 @@ public class FXMLGestionClinicaController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        clinicDBAccess.setClinicName("Clínica Oldfield");
         gridPane.prefHeightProperty().bind(anchorPane.heightProperty());
         gridPane.prefWidthProperty().bind(anchorPane.widthProperty());
         bloom.setLevel(0.5);
@@ -170,6 +172,24 @@ public class FXMLGestionClinicaController implements Initializable {
     @FXML
     private void onMExitedNosotros(MouseEvent event) {
         nosotrosButton.setEffect(null);
+    }
+
+    @FXML
+    private void opcionesAct(ActionEvent event) {
+        Alert alertAmazon = new Alert(Alert.AlertType.INFORMATION);
+            alertAmazon.setTitle("Error");
+            alertAmazon.setHeaderText("Esta función no está implementada");
+            alertAmazon.setContentText("En próximas versiones podrá disfrutar de esta funcionalidad");
+            alertAmazon.showAndWait();
+    }
+
+    @FXML
+    private void sobreNosotrosAct(ActionEvent event) {
+        Alert alertAmazon = new Alert(Alert.AlertType.INFORMATION);
+            alertAmazon.setTitle("Error");
+            alertAmazon.setHeaderText("Esta función no está implementada");
+            alertAmazon.setContentText("En próximas versiones podrá disfrutar de esta funcionalidad");
+            alertAmazon.showAndWait();
     }
     
 }

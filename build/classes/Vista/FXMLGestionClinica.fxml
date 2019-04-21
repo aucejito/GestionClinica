@@ -49,20 +49,31 @@
                   <Insets top="20.0" />
                </GridPane.margin>
             </Button>
-            <Button fx:id="opcionesButton" mnemonicParsing="false" onMouseEntered="#onMEnteredOpciones" onMouseExited="#onMExitedOpciones" prefHeight="53.0" prefWidth="127.0" style="-fx-background-color: rgb(127, 182, 216);" text="Opciones" textFill="WHITE" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="5">
+            <Button fx:id="opcionesButton" mnemonicParsing="false" onAction="#opcionesAct" onMouseEntered="#onMEnteredOpciones" onMouseExited="#onMExitedOpciones" prefHeight="53.0" prefWidth="127.0" style="-fx-background-color: rgb(127, 182, 216);" text="Opciones" textFill="WHITE" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="5">
                <GridPane.margin>
                   <Insets left="80.0" right="120.0" />
                </GridPane.margin>
             </Button>
-            <Button fx:id="nosotrosButton" contentDisplay="TOP" mnemonicParsing="false" onMouseEntered="#onMEnteredNosotros" onMouseExited="#onMExitedNosotros" prefHeight="53.0" prefWidth="127.0" style="-fx-background-color: rgb(127, 182, 216);" text="Sobre nosotros..." textFill="WHITE" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="5">
+            <Button fx:id="nosotrosButton" contentDisplay="TOP" mnemonicParsing="false" onAction="#sobreNosotrosAct" onMouseEntered="#onMEnteredNosotros" onMouseExited="#onMExitedNosotros" prefHeight="53.0" prefWidth="127.0" style="-fx-background-color: rgb(127, 182, 216);" text="Sobre nosotros..." textFill="WHITE" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="5">
                <GridPane.margin>
                   <Insets left="120.0" right="80.0" />
                </GridPane.margin>
             </Button>
-            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="37.0" prefWidth="249.0" text="Clínica Mis Muertos SL" textAlignment="CENTER" GridPane.columnSpan="3" GridPane.halignment="CENTER">
+            <Label alignment="CENTER" contentDisplay="CENTER" opacity="0.33" prefHeight="37.0" prefWidth="261.0" style="-fx-background-color: #BADCEF;" text="Clínica Oldfield" textAlignment="CENTER" GridPane.columnSpan="3" GridPane.halignment="CENTER" GridPane.rowSpan="2" GridPane.valignment="TOP">
                <font>
-                  <Font name="OCR A Extended" size="18.0" />
-               </font></Label>
+                  <Font name="OCR A Extended" size="26.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets top="40.0" />
+               </GridPane.margin></Label>
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="115.0" layoutY="50.0" prefHeight="37.0" prefWidth="267.0" text="Clínica Oldfield" textAlignment="CENTER" GridPane.columnSpan="3" GridPane.halignment="CENTER" GridPane.rowSpan="2" GridPane.valignment="TOP">
+               <font>
+                  <Font name="OCR A Extended" size="26.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets top="40.0" />
+               </GridPane.margin>
+            </Label>
          </children>
       </GridPane>
    </children>

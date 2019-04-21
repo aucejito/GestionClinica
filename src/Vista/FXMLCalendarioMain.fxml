@@ -3,12 +3,16 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane id="AnchorPane" fx:id="scene" prefHeight="344.0" prefWidth="538.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gestionclinica.FXMLCalendarioMainController">
    <children>
@@ -16,27 +20,48 @@
          <right>
             <VBox prefHeight="454.0" prefWidth="118.0" BorderPane.alignment="CENTER">
                <children>
-                  <Button accessibleHelp="Añadir paciente" accessibleText="Añadir paciente" mnemonicParsing="false" onAction="#addCitas" prefHeight="47.0" prefWidth="118.0" style="-fx-background-color: rgb(239, 242, 242);" text="añadir">
+                  <Button accessibleHelp="Añadir paciente" accessibleText="Añadir paciente" mnemonicParsing="false" onAction="#addCitas" prefHeight="44.0" prefWidth="124.0" style="-fx-background-color: #BADCEF;">
                      <VBox.margin>
                         <Insets />
                      </VBox.margin>
+                     <graphic>
+                        <ImageView fitHeight="49.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../calendar_añadir.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
                   </Button>
-                  <Button accessibleHelp="Añadir paciente" accessibleText="Añadir paciente" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="118.0" style="-fx-background-color: rgb(239, 242, 242);" text="borrar">
+                  <Button fx:id="delButton" accessibleHelp="Añadir paciente" accessibleText="Añadir paciente" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#delAct" prefHeight="47.0" prefWidth="118.0" style="-fx-background-color: #BADCEF;">
                      <VBox.margin>
                         <Insets top="20.0" />
                      </VBox.margin>
+                     <graphic>
+                        <ImageView fitHeight="49.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../calendar_borrar.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
                   </Button>
-                  <Button accessibleHelp="Añadir paciente" accessibleText="Añadir paciente" layoutX="10.0" layoutY="57.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="118.0" style="-fx-background-color: rgb(239, 242, 242);" text="Mostrar detalles">
+                  <Button fx:id="showButton" accessibleHelp="Añadir paciente" accessibleText="Añadir paciente" layoutX="10.0" layoutY="57.0" mnemonicParsing="false" onAction="#showAct" prefHeight="47.0" prefWidth="118.0" style="-fx-background-color: #BADCEF;">
                      <VBox.margin>
                         <Insets top="20.0" />
                      </VBox.margin>
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
+                     <graphic>
+                        <ImageView fitHeight="49.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../calendar_info.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
                   </Button>
                </children>
                <padding>
-                  <Insets top="30.0" />
+                  <Insets top="5.0" />
                </padding>
                <BorderPane.margin>
                   <Insets left="5.0" right="5.0" />
@@ -46,9 +71,9 @@
          <center>
             <TableView fx:id="tablaCitas" prefHeight="180.0" prefWidth="467.0" BorderPane.alignment="CENTER">
               <columns>
-                <TableColumn fx:id="medColumn" maxWidth="6000.0" prefWidth="139.0" style="-fx-alignment: CENTER; -fx-font-size: 13;" text="Médico" />
-                <TableColumn fx:id="pacienteColumn" maxWidth="6000.0" prefWidth="139.0" style="-fx-alignment: CENTER; -fx-font-size: 13;" text="Paciente" />
-                  <TableColumn fx:id="horaColumn" maxWidth="6000.0" prefWidth="139.0" style="-fx-alignment: CENTER; -fx-font-size: 13;" text="Hora" />
+                <TableColumn fx:id="medColumn" maxWidth="6000.0" prefWidth="181.0" style="-fx-alignment: CENTER; -fx-font-size: 13;" text="Médico" />
+                <TableColumn fx:id="pacienteColumn" maxWidth="6000.0" prefWidth="202.0" style="-fx-alignment: CENTER; -fx-font-size: 13;" text="Paciente" />
+                  <TableColumn fx:id="horaColumn" maxWidth="6000.0" prefWidth="83.0" style="-fx-alignment: CENTER; -fx-font-size: 13;" text="Hora" />
               </columns>
                <BorderPane.margin>
                   <Insets bottom="5.0" left="5.0" top="5.0" />
@@ -56,29 +81,29 @@
             </TableView>
          </center>
          <top>
-            <HBox maxWidth="-Infinity" prefHeight="25.0" prefWidth="467.0" BorderPane.alignment="TOP_LEFT">
+            <HBox alignment="CENTER" maxWidth="-Infinity" prefHeight="25.0" prefWidth="453.0" BorderPane.alignment="TOP_LEFT">
                <children>
-                  <Button fx:id="prevWeekButton" mnemonicParsing="false" prefHeight="52.0" prefWidth="41.0" text="&lt;&lt;&lt;">
+                  <Label text="Selecciona una fecha" textFill="#303d5e">
                      <HBox.margin>
-                        <Insets />
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <DatePicker fx:id="datePicker">
+                     <HBox.margin>
+                        <Insets bottom="1.0" top="1.0" />
+                     </HBox.margin>
+                  </DatePicker>
+                  <Button fx:id="actualizarTablaButton" mnemonicParsing="false" onAction="#refreshTableAct" prefHeight="10.0" text="Actualizar tabla">
+                     <HBox.margin>
+                        <Insets bottom="1.0" left="5.0" top="1.0" />
                      </HBox.margin>
                   </Button>
-                  <HBox alignment="TOP_RIGHT" maxWidth="-Infinity" prefHeight="25.0" prefWidth="426.0">
-                     <children>
-                        <DatePicker fx:id="datePicker" />
-                        <Button fx:id="nextWeekButton" alignment="CENTER_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" prefHeight="52.0" prefWidth="41.0" text="&gt;&gt;&gt;">
-                           <HBox.margin>
-                              <Insets />
-                           </HBox.margin>
-                        </Button>
-                     </children>
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                  </HBox>
                </children>
                <BorderPane.margin>
-                  <Insets left="5.0" top="5.0" />
+                  <Insets left="5.0" top="10.0" />
                </BorderPane.margin>
             </HBox>
          </top>

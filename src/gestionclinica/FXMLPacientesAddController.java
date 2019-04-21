@@ -153,6 +153,7 @@ public class FXMLPacientesAddController implements Initializable {
             patientsObservableList = FXCollections.observableList(clinicDBAccess.getPatients());
             patientsObservableList.add(nuevoPaciente);
             guardadoP = true;
+            
         }
                
         

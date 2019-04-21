@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" fx:id="scene" prefHeight="492.0" prefWidth="624.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gestionclinica.FXMLCalendarioDetallesController">
+   <children>
+      <ImageView fitHeight="492.0" fitWidth="624.0" opacity="0.3" pickOnBounds="true">
+         <image>
+            <Image url="@../attractive-backdrop-background-988872.jpg" />
+         </image>
+      </ImageView>
+      <GridPane fx:id="gridPane" layoutY="12.0" prefHeight="467.0" prefWidth="624.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="304.0" minWidth="10.0" prefWidth="188.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="435.0" minWidth="10.0" prefWidth="154.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="435.0" minWidth="10.0" prefWidth="284.0" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <ImageView fx:id="fotoPaciente" fitHeight="135.0" fitWidth="146.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+            <Label text="Nombre paciente" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Label layoutX="197.0" layoutY="75.0" text="Apellidos paciente" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <TextField fx:id="nombrePacienteTextField" editable="false" maxWidth="-Infinity" prefHeight="25.0" prefWidth="171.0" GridPane.columnIndex="2" />
+            <TextField fx:id="apellidoPacienteTextfield" editable="false" maxWidth="-Infinity" prefHeight="25.0" prefWidth="254.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <TextField fx:id="horaTextField" editable="false" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="100.0" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+            <Label layoutX="213.0" layoutY="122.0" text="Hora cita" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Label layoutX="213.0" layoutY="70.0" text="Teléfono paciente" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <TextField fx:id="telefonoPacienteTextField" editable="false" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="171.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <Label layoutX="214.0" layoutY="130.0" text="Fecha cita" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <TextField fx:id="fechaTextfield" editable="false" maxWidth="-Infinity" prefWidth="100.0" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+            <TextField fx:id="nombreDoctorTextField" editable="false" maxWidth="-Infinity" prefWidth="171.0" GridPane.columnIndex="2" GridPane.rowIndex="8" />
+            <TextField fx:id="apellidosDoctorTextField" editable="false" maxWidth="-Infinity" prefWidth="254.0" GridPane.columnIndex="2" GridPane.rowIndex="9" />
+            <TextField fx:id="consultaTextfield" editable="false" maxWidth="-Infinity" prefHeight="25.0" prefWidth="171.0" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+            <Label layoutX="216.0" layoutY="23.0" text="Consulta" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="6">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Label layoutX="10.0" layoutY="23.0" text="Apellidos doctor" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="9">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Label layoutX="10.0" layoutY="23.0" text="Nombre doctor" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="8">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Label layoutX="197.0" layoutY="446.0" text="Teléfono doctor" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="10">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <TextField fx:id="telefonoDoctorTextfield" editable="false" layoutX="350.0" layoutY="360.0" maxWidth="-Infinity" prefWidth="171.0" GridPane.columnIndex="2" GridPane.rowIndex="10" />
+            <ImageView fx:id="fotoDoctor" fitHeight="135.0" fitWidth="146.0" layoutX="31.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="9" />
+            <Button fx:id="salirButton" mnemonicParsing="false" onAction="#salirAct" prefHeight="31.0" prefWidth="92.0" style="-fx-background-color: #BADCEF;" text="Salir" GridPane.halignment="CENTER" GridPane.rowIndex="5">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Button>
+         </children>
+      </GridPane>
+   </children>
+</AnchorPane>
